@@ -21,7 +21,10 @@ int main(int argc, char const *argv[])
     MatrixDataset::matrix testX = TestDataset.X();
     MatrixDataset::vector testY = TestDataset.Y();
 
-    cout<<"Trainx: "<<trainX.rows()<<" * "<<trainX.cols()<<endl;
+    cout<<"Trainx corner1: \n"<<trainX.block(0,0,20,20)<<" * "<<endl;
+    cout<<"Trainx corner2: \n"<<trainX.block(100,870,20,20)<<" * "<<endl;
+    
+    cout<<"Trainx: "<<trainX.rows()<<" * "<<trainX.cols()<<"mean: "<< trainX.mean() <<endl;
     cout<<"Trainy: "<<trainY.rows()<<" * "<<trainY.cols()<<endl;
     cout<<"Testx: "<<testX.rows()<<" * "<<testX.cols()<<endl;
     cout<<"Testy: "<<testY.rows()<<" * "<<testY.cols()<<endl;

@@ -212,6 +212,7 @@ int main( int argc, char** argv )
 
         vector<float> descriptorsValues;
         for (int j = 0;j<tmp.imghog_size();j++){
+            assert(tmp.imghog(j)==tmp.imghog(j)); // this used to check nan
             descriptorsValues.push_back(tmp.imghog(j));
         }
         Mat img = imread(tmp.imgpath(), 0);

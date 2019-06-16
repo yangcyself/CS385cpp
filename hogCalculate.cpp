@@ -16,6 +16,8 @@
 #include <string>
 #include <errno.h>
 
+// #include <algorithm>    // std::min
+
 using namespace cv;
 using namespace std;
 
@@ -45,7 +47,21 @@ void addAnImage(dataset::ImageDescrip * dscrp, HOGDescriptor& d,
     dscrp -> set_classtype(classtype=="pos"? dataset::POS : dataset::NEG );
     dscrp -> set_datatype(datatype=="train"? dataset::TRAIN : dataset::TEST);
     for (int i = 0;i< descriptorsValues.size();i++){
-        dscrp -> add_imghog(descriptorsValues[i]);
+        // assert(descriptorsValues[i] == descriptorsValues[i]); // check nan 
+        /**
+         * unfortunately, there are nans in the descriptors, there is a web page about nan in hog
+         * http://smsoftdev-solutions.blogspot.com/2009/08/integral-histogram-for-fast-calculation.html
+         * but I can't change the source code.
+         * So I just change the nan into 0
+         * XIT
+         * also, most of the numbers a re less than 0.5, however, the mean of it is e+33
+         * So I clam it.
+         * XIT
+         */
+        if(descriptorsValues[i] == descriptorsValues[i])
+            dscrp -> add_imghog(descriptorsValues[i] > 1.0 ? 1.0:descriptorsValues[i]  );
+        else
+            dscrp -> add_imghog(0);
     }
 }
 
