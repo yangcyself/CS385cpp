@@ -14,8 +14,8 @@ void addAnImage(dataset::ImageDescrip * dscrp)
 {
   vector<float> descriptorsValues = {1,1,0,1,2,8,1,9,9,8,8,7,2,3};
   dscrp -> set_imgpath("/yangcy/CS385/codes/out/train/pos/01_22.jpg");
-  dscrp -> set_classtype(dataset::ImageDescrip::POS);
-  dscrp -> set_datatype(dataset::ImageDescrip::TRAIN);
+  dscrp -> set_classtype(dataset::POS);
+  dscrp -> set_datatype(dataset::TRAIN);
   for (int i = 0;i< descriptorsValues.size();i++){
     dscrp -> add_imghog(descriptorsValues[i]);
   }

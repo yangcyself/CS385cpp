@@ -187,10 +187,10 @@ const string OUTFOLDER="./tmp/";
 int main( int argc, char** argv )
 {
     cout<<"start"<<endl;
-    dataset::hog imagehogs; 
+    dataset::hogdataset imagehogsdataset; 
     { 
         fstream input("./out/hog.ptbf", ios::in | ios::binary); 
-        if (!imagehogs.ParseFromIstream(&input)) { 
+        if (!imagehogsdataset.ParseFromIstream(&input)) { 
             cerr << "Failed to parse address book." << endl; 
             return -1; 
         } 
@@ -199,6 +199,7 @@ int main( int argc, char** argv )
         cout <<"usage: ./hogOutVisualize <visualize index>" <<endl;
         return -2;
     }
+    dataset::hog imagehogs = imagehogsdataset.data(0); 
     for (int i = 1; i< argc;i++){
         int ind = atoi(argv[i]);
         cout << "Loading the index "<< ind<< " from protobuf file"<< endl;

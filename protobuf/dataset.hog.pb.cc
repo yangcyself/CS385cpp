@@ -17,6 +17,7 @@
 #include <google/protobuf/port_def.inc>
 
 extern PROTOBUF_INTERNAL_EXPORT_dataset_2ehog_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ImageDescrip_dataset_2ehog_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_dataset_2ehog_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_hog_dataset_2ehog_2eproto;
 namespace dataset {
 class ImageDescripDefaultTypeInternal {
  public:
@@ -26,6 +27,10 @@ class hogDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<hog> _instance;
 } _hog_default_instance_;
+class hogdatasetDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<hogdataset> _instance;
+} _hogdataset_default_instance_;
 }  // namespace dataset
 static void InitDefaultsImageDescrip_dataset_2ehog_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -56,12 +61,28 @@ static void InitDefaultshog_dataset_2ehog_2eproto() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultshog_dataset_2ehog_2eproto}, {
       &scc_info_ImageDescrip_dataset_2ehog_2eproto.base,}};
 
+static void InitDefaultshogdataset_dataset_2ehog_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::dataset::_hogdataset_default_instance_;
+    new (ptr) ::dataset::hogdataset();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::dataset::hogdataset::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_hogdataset_dataset_2ehog_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultshogdataset_dataset_2ehog_2eproto}, {
+      &scc_info_hog_dataset_2ehog_2eproto.base,}};
+
 void InitDefaults_dataset_2ehog_2eproto() {
   ::google::protobuf::internal::InitSCC(&scc_info_ImageDescrip_dataset_2ehog_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_hog_dataset_2ehog_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_hogdataset_dataset_2ehog_2eproto.base);
 }
 
-::google::protobuf::Metadata file_level_metadata_dataset_2ehog_2eproto[2];
+::google::protobuf::Metadata file_level_metadata_dataset_2ehog_2eproto[3];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors_dataset_2ehog_2eproto[2];
 constexpr ::google::protobuf::ServiceDescriptor const** file_level_service_descriptors_dataset_2ehog_2eproto = nullptr;
 
@@ -85,38 +106,53 @@ const ::google::protobuf::uint32 TableStruct_dataset_2ehog_2eproto::offsets[] PR
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::dataset::hog, image_),
+  PROTOBUF_FIELD_OFFSET(::dataset::hog, classtype_),
+  PROTOBUF_FIELD_OFFSET(::dataset::hog, datatype_),
+  ~0u,
+  0,
+  1,
+  PROTOBUF_FIELD_OFFSET(::dataset::hogdataset, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::dataset::hogdataset, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::dataset::hogdataset, data_),
   ~0u,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 9, sizeof(::dataset::ImageDescrip)},
-  { 13, 19, sizeof(::dataset::hog)},
+  { 13, 21, sizeof(::dataset::hog)},
+  { 24, 30, sizeof(::dataset::hogdataset)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::dataset::_ImageDescrip_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::dataset::_hog_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::dataset::_hogdataset_default_instance_),
 };
 
 ::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_dataset_2ehog_2eproto = {
   {}, AddDescriptors_dataset_2ehog_2eproto, "dataset.hog.proto", schemas,
   file_default_instances, TableStruct_dataset_2ehog_2eproto::offsets,
-  file_level_metadata_dataset_2ehog_2eproto, 2, file_level_enum_descriptors_dataset_2ehog_2eproto, file_level_service_descriptors_dataset_2ehog_2eproto,
+  file_level_metadata_dataset_2ehog_2eproto, 3, file_level_enum_descriptors_dataset_2ehog_2eproto, file_level_service_descriptors_dataset_2ehog_2eproto,
 };
 
 const char descriptor_table_protodef_dataset_2ehog_2eproto[] =
-  "\n\021dataset.hog.proto\022\007dataset\"\331\001\n\014ImageDe"
-  "scrip\022\017\n\007imgpath\030\001 \002(\t\022\022\n\006imghog\030\002 \003(\002B\002"
-  "\020\001\0222\n\tclasstype\030\003 \001(\0162\037.dataset.ImageDes"
-  "crip.ClassType\0220\n\010datatype\030\004 \001(\0162\036.datas"
-  "et.ImageDescrip.DataType\"\035\n\tClassType\022\007\n"
-  "\003NEG\020\000\022\007\n\003POS\020\001\"\037\n\010DataType\022\t\n\005TRAIN\020\000\022\010"
-  "\n\004TEST\020\001\"+\n\003hog\022$\n\005image\030\001 \003(\0132\025.dataset"
-  ".ImageDescrip"
+  "\n\021dataset.hog.proto\022\007dataset\"\177\n\014ImageDes"
+  "crip\022\017\n\007imgpath\030\001 \002(\t\022\022\n\006imghog\030\002 \003(\002B\002\020"
+  "\001\022%\n\tclasstype\030\003 \001(\0162\022.dataset.ClassType"
+  "\022#\n\010datatype\030\004 \001(\0162\021.dataset.DataType\"w\n"
+  "\003hog\022$\n\005image\030\001 \003(\0132\025.dataset.ImageDescr"
+  "ip\022%\n\tclasstype\030\002 \001(\0162\022.dataset.ClassTyp"
+  "e\022#\n\010datatype\030\003 \001(\0162\021.dataset.DataType\"("
+  "\n\nhogdataset\022\032\n\004data\030\001 \003(\0132\014.dataset.hog"
+  "*\035\n\tClassType\022\007\n\003NEG\020\000\022\007\n\003POS\020\001*\037\n\010DataT"
+  "ype\022\t\n\005TRAIN\020\000\022\010\n\004TEST\020\001"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_dataset_2ehog_2eproto = {
   false, InitDefaults_dataset_2ehog_2eproto, 
   descriptor_table_protodef_dataset_2ehog_2eproto,
-  "dataset.hog.proto", &assign_descriptors_table_dataset_2ehog_2eproto, 293,
+  "dataset.hog.proto", &assign_descriptors_table_dataset_2ehog_2eproto, 384,
 };
 
 void AddDescriptors_dataset_2ehog_2eproto() {
@@ -129,11 +165,11 @@ void AddDescriptors_dataset_2ehog_2eproto() {
 // Force running AddDescriptors() at dynamic initialization time.
 static bool dynamic_init_dummy_dataset_2ehog_2eproto = []() { AddDescriptors_dataset_2ehog_2eproto(); return true; }();
 namespace dataset {
-const ::google::protobuf::EnumDescriptor* ImageDescrip_ClassType_descriptor() {
+const ::google::protobuf::EnumDescriptor* ClassType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_dataset_2ehog_2eproto);
   return file_level_enum_descriptors_dataset_2ehog_2eproto[0];
 }
-bool ImageDescrip_ClassType_IsValid(int value) {
+bool ClassType_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -143,18 +179,11 @@ bool ImageDescrip_ClassType_IsValid(int value) {
   }
 }
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const ImageDescrip_ClassType ImageDescrip::NEG;
-const ImageDescrip_ClassType ImageDescrip::POS;
-const ImageDescrip_ClassType ImageDescrip::ClassType_MIN;
-const ImageDescrip_ClassType ImageDescrip::ClassType_MAX;
-const int ImageDescrip::ClassType_ARRAYSIZE;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-const ::google::protobuf::EnumDescriptor* ImageDescrip_DataType_descriptor() {
+const ::google::protobuf::EnumDescriptor* DataType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_dataset_2ehog_2eproto);
   return file_level_enum_descriptors_dataset_2ehog_2eproto[1];
 }
-bool ImageDescrip_DataType_IsValid(int value) {
+bool DataType_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -164,13 +193,6 @@ bool ImageDescrip_DataType_IsValid(int value) {
   }
 }
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const ImageDescrip_DataType ImageDescrip::TRAIN;
-const ImageDescrip_DataType ImageDescrip::TEST;
-const ImageDescrip_DataType ImageDescrip::DataType_MIN;
-const ImageDescrip_DataType ImageDescrip::DataType_MAX;
-const int ImageDescrip::DataType_ARRAYSIZE;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 // ===================================================================
 
@@ -313,27 +335,27 @@ const char* ImageDescrip::_InternalParse(const char* begin, const char* end, voi
         } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 21 && (ptr += 1));
         break;
       }
-      // optional .dataset.ImageDescrip.ClassType classtype = 3;
+      // optional .dataset.ClassType classtype = 3;
       case 3: {
         if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
         ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
-        if (!::dataset::ImageDescrip_ClassType_IsValid(val)) {
+        if (!::dataset::ClassType_IsValid(val)) {
           ::google::protobuf::internal::WriteVarint(3, val, msg->mutable_unknown_fields());
           break;
         }
-        msg->set_classtype(static_cast<::dataset::ImageDescrip_ClassType>(val));
+        msg->set_classtype(static_cast<::dataset::ClassType>(val));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional .dataset.ImageDescrip.DataType datatype = 4;
+      // optional .dataset.DataType datatype = 4;
       case 4: {
         if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
         ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
-        if (!::dataset::ImageDescrip_DataType_IsValid(val)) {
+        if (!::dataset::DataType_IsValid(val)) {
           ::google::protobuf::internal::WriteVarint(4, val, msg->mutable_unknown_fields());
           break;
         }
-        msg->set_datatype(static_cast<::dataset::ImageDescrip_DataType>(val));
+        msg->set_datatype(static_cast<::dataset::DataType>(val));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -402,15 +424,15 @@ bool ImageDescrip::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .dataset.ImageDescrip.ClassType classtype = 3;
+      // optional .dataset.ClassType classtype = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
           int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::dataset::ImageDescrip_ClassType_IsValid(value)) {
-            set_classtype(static_cast< ::dataset::ImageDescrip_ClassType >(value));
+          if (::dataset::ClassType_IsValid(value)) {
+            set_classtype(static_cast< ::dataset::ClassType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
                 3, static_cast<::google::protobuf::uint64>(value));
@@ -421,15 +443,15 @@ bool ImageDescrip::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .dataset.ImageDescrip.DataType datatype = 4;
+      // optional .dataset.DataType datatype = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
           int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::dataset::ImageDescrip_DataType_IsValid(value)) {
-            set_datatype(static_cast< ::dataset::ImageDescrip_DataType >(value));
+          if (::dataset::DataType_IsValid(value)) {
+            set_datatype(static_cast< ::dataset::DataType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
                 4, static_cast<::google::protobuf::uint64>(value));
@@ -487,13 +509,13 @@ void ImageDescrip::SerializeWithCachedSizes(
       this->imghog().data(), this->imghog_size(), output);
   }
 
-  // optional .dataset.ImageDescrip.ClassType classtype = 3;
+  // optional .dataset.ClassType classtype = 3;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       3, this->classtype(), output);
   }
 
-  // optional .dataset.ImageDescrip.DataType datatype = 4;
+  // optional .dataset.DataType datatype = 4;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       4, this->datatype(), output);
@@ -537,13 +559,13 @@ void ImageDescrip::SerializeWithCachedSizes(
       WriteFloatNoTagToArray(this->imghog_, target);
   }
 
-  // optional .dataset.ImageDescrip.ClassType classtype = 3;
+  // optional .dataset.ClassType classtype = 3;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       3, this->classtype(), target);
   }
 
-  // optional .dataset.ImageDescrip.DataType datatype = 4;
+  // optional .dataset.DataType datatype = 4;
   if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       4, this->datatype(), target);
@@ -593,13 +615,13 @@ size_t ImageDescrip::ByteSizeLong() const {
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000006u) {
-    // optional .dataset.ImageDescrip.ClassType classtype = 3;
+    // optional .dataset.ClassType classtype = 3;
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->classtype());
     }
 
-    // optional .dataset.ImageDescrip.DataType datatype = 4;
+    // optional .dataset.DataType datatype = 4;
     if (cached_has_bits & 0x00000004u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->datatype());
@@ -696,10 +718,18 @@ void hog::InitAsDefaultInstance() {
 }
 class hog::HasBitSetters {
  public:
+  static void set_has_classtype(hog* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+  static void set_has_datatype(hog* msg) {
+    msg->_has_bits_[0] |= 0x00000002u;
+  }
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int hog::kImageFieldNumber;
+const int hog::kClasstypeFieldNumber;
+const int hog::kDatatypeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 hog::hog()
@@ -713,12 +743,18 @@ hog::hog(const hog& from)
       _has_bits_(from._has_bits_),
       image_(from.image_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&classtype_, &from.classtype_,
+    static_cast<size_t>(reinterpret_cast<char*>(&datatype_) -
+    reinterpret_cast<char*>(&classtype_)) + sizeof(datatype_));
   // @@protoc_insertion_point(copy_constructor:dataset.hog)
 }
 
 void hog::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_hog_dataset_2ehog_2eproto.base);
+  ::memset(&classtype_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&datatype_) -
+      reinterpret_cast<char*>(&classtype_)) + sizeof(datatype_));
 }
 
 hog::~hog() {
@@ -745,6 +781,12 @@ void hog::Clear() {
   (void) cached_has_bits;
 
   image_.Clear();
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    ::memset(&classtype_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&datatype_) -
+        reinterpret_cast<char*>(&classtype_)) + sizeof(datatype_));
+  }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
@@ -776,6 +818,30 @@ const char* hog::_InternalParse(const char* begin, const char* end, void* object
               {parser_till_end, object}, ptr - size, ptr));
           if (ptr >= end) break;
         } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 10 && (ptr += 1));
+        break;
+      }
+      // optional .dataset.ClassType classtype = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::dataset::ClassType_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(2, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_classtype(static_cast<::dataset::ClassType>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional .dataset.DataType datatype = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::dataset::DataType_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(3, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_datatype(static_cast<::dataset::DataType>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
       default: {
@@ -819,6 +885,44 @@ bool hog::MergePartialFromCodedStream(
         break;
       }
 
+      // optional .dataset.ClassType classtype = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+          int value = 0;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::dataset::ClassType_IsValid(value)) {
+            set_classtype(static_cast< ::dataset::ClassType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(
+                2, static_cast<::google::protobuf::uint64>(value));
+          }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional .dataset.DataType datatype = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
+          int value = 0;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::dataset::DataType_IsValid(value)) {
+            set_datatype(static_cast< ::dataset::DataType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(
+                3, static_cast<::google::protobuf::uint64>(value));
+          }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -855,6 +959,19 @@ void hog::SerializeWithCachedSizes(
       output);
   }
 
+  cached_has_bits = _has_bits_[0];
+  // optional .dataset.ClassType classtype = 2;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->classtype(), output);
+  }
+
+  // optional .dataset.DataType datatype = 3;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->datatype(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -874,6 +991,19 @@ void hog::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, this->image(static_cast<int>(i)), target);
+  }
+
+  cached_has_bits = _has_bits_[0];
+  // optional .dataset.ClassType classtype = 2;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->classtype(), target);
+  }
+
+  // optional .dataset.DataType datatype = 3;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      3, this->datatype(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -908,6 +1038,21 @@ size_t hog::ByteSizeLong() const {
     }
   }
 
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // optional .dataset.ClassType classtype = 2;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->classtype());
+    }
+
+    // optional .dataset.DataType datatype = 3;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->datatype());
+    }
+
+  }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -936,6 +1081,16 @@ void hog::MergeFrom(const hog& from) {
   (void) cached_has_bits;
 
   image_.MergeFrom(from.image_);
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      classtype_ = from.classtype_;
+    }
+    if (cached_has_bits & 0x00000002u) {
+      datatype_ = from.datatype_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
 }
 
 void hog::CopyFrom(const ::google::protobuf::Message& from) {
@@ -966,9 +1121,295 @@ void hog::InternalSwap(hog* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   CastToBase(&image_)->InternalSwap(CastToBase(&other->image_));
+  swap(classtype_, other->classtype_);
+  swap(datatype_, other->datatype_);
 }
 
 ::google::protobuf::Metadata hog::GetMetadata() const {
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_dataset_2ehog_2eproto);
+  return ::file_level_metadata_dataset_2ehog_2eproto[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void hogdataset::InitAsDefaultInstance() {
+}
+class hogdataset::HasBitSetters {
+ public:
+};
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int hogdataset::kDataFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+hogdataset::hogdataset()
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:dataset.hogdataset)
+}
+hogdataset::hogdataset(const hogdataset& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(nullptr),
+      _has_bits_(from._has_bits_),
+      data_(from.data_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:dataset.hogdataset)
+}
+
+void hogdataset::SharedCtor() {
+  ::google::protobuf::internal::InitSCC(
+      &scc_info_hogdataset_dataset_2ehog_2eproto.base);
+}
+
+hogdataset::~hogdataset() {
+  // @@protoc_insertion_point(destructor:dataset.hogdataset)
+  SharedDtor();
+}
+
+void hogdataset::SharedDtor() {
+}
+
+void hogdataset::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const hogdataset& hogdataset::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_hogdataset_dataset_2ehog_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void hogdataset::Clear() {
+// @@protoc_insertion_point(message_clear_start:dataset.hogdataset)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  data_.Clear();
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* hogdataset::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<hogdataset*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // repeated .dataset.hog data = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
+        do {
+          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          parser_till_end = ::dataset::hog::_InternalParse;
+          object = msg->add_data();
+          if (size > end - ptr) goto len_delim_till_end;
+          ptr += size;
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
+              {parser_till_end, object}, ptr - size, ptr));
+          if (ptr >= end) break;
+        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 10 && (ptr += 1));
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+len_delim_till_end:
+  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
+                               {parser_till_end, object}, size);
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool hogdataset::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:dataset.hogdataset)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .dataset.hog data = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_data()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:dataset.hogdataset)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:dataset.hogdataset)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void hogdataset::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:dataset.hogdataset)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .dataset.hog data = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->data_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1,
+      this->data(static_cast<int>(i)),
+      output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:dataset.hogdataset)
+}
+
+::google::protobuf::uint8* hogdataset::InternalSerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:dataset.hogdataset)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .dataset.hog data = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->data_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->data(static_cast<int>(i)), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:dataset.hogdataset)
+  return target;
+}
+
+size_t hogdataset::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:dataset.hogdataset)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .dataset.hog data = 1;
+  {
+    unsigned int count = static_cast<unsigned int>(this->data_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->data(static_cast<int>(i)));
+    }
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void hogdataset::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:dataset.hogdataset)
+  GOOGLE_DCHECK_NE(&from, this);
+  const hogdataset* source =
+      ::google::protobuf::DynamicCastToGenerated<hogdataset>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dataset.hogdataset)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dataset.hogdataset)
+    MergeFrom(*source);
+  }
+}
+
+void hogdataset::MergeFrom(const hogdataset& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:dataset.hogdataset)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  data_.MergeFrom(from.data_);
+}
+
+void hogdataset::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:dataset.hogdataset)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void hogdataset::CopyFrom(const hogdataset& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:dataset.hogdataset)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool hogdataset::IsInitialized() const {
+  if (!::google::protobuf::internal::AllAreInitialized(this->data())) return false;
+  return true;
+}
+
+void hogdataset::Swap(hogdataset* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void hogdataset::InternalSwap(hogdataset* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  CastToBase(&data_)->InternalSwap(CastToBase(&other->data_));
+}
+
+::google::protobuf::Metadata hogdataset::GetMetadata() const {
   ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_dataset_2ehog_2eproto);
   return ::file_level_metadata_dataset_2ehog_2eproto[kIndexInFileMessages];
 }
@@ -983,6 +1424,9 @@ template<> PROTOBUF_NOINLINE ::dataset::ImageDescrip* Arena::CreateMaybeMessage<
 }
 template<> PROTOBUF_NOINLINE ::dataset::hog* Arena::CreateMaybeMessage< ::dataset::hog >(Arena* arena) {
   return Arena::CreateInternal< ::dataset::hog >(arena);
+}
+template<> PROTOBUF_NOINLINE ::dataset::hogdataset* Arena::CreateMaybeMessage< ::dataset::hogdataset >(Arena* arena) {
+  return Arena::CreateInternal< ::dataset::hogdataset >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

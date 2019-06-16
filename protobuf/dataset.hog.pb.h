@@ -42,7 +42,7 @@ struct TableStruct_dataset_2ehog_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[2]
+  static const ::google::protobuf::internal::ParseTable schema[3]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -56,52 +56,56 @@ extern ImageDescripDefaultTypeInternal _ImageDescrip_default_instance_;
 class hog;
 class hogDefaultTypeInternal;
 extern hogDefaultTypeInternal _hog_default_instance_;
+class hogdataset;
+class hogdatasetDefaultTypeInternal;
+extern hogdatasetDefaultTypeInternal _hogdataset_default_instance_;
 }  // namespace dataset
 namespace google {
 namespace protobuf {
 template<> ::dataset::ImageDescrip* Arena::CreateMaybeMessage<::dataset::ImageDescrip>(Arena*);
 template<> ::dataset::hog* Arena::CreateMaybeMessage<::dataset::hog>(Arena*);
+template<> ::dataset::hogdataset* Arena::CreateMaybeMessage<::dataset::hogdataset>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace dataset {
 
-enum ImageDescrip_ClassType {
-  ImageDescrip_ClassType_NEG = 0,
-  ImageDescrip_ClassType_POS = 1
+enum ClassType {
+  NEG = 0,
+  POS = 1
 };
-bool ImageDescrip_ClassType_IsValid(int value);
-const ImageDescrip_ClassType ImageDescrip_ClassType_ClassType_MIN = ImageDescrip_ClassType_NEG;
-const ImageDescrip_ClassType ImageDescrip_ClassType_ClassType_MAX = ImageDescrip_ClassType_POS;
-const int ImageDescrip_ClassType_ClassType_ARRAYSIZE = ImageDescrip_ClassType_ClassType_MAX + 1;
+bool ClassType_IsValid(int value);
+const ClassType ClassType_MIN = NEG;
+const ClassType ClassType_MAX = POS;
+const int ClassType_ARRAYSIZE = ClassType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ImageDescrip_ClassType_descriptor();
-inline const ::std::string& ImageDescrip_ClassType_Name(ImageDescrip_ClassType value) {
+const ::google::protobuf::EnumDescriptor* ClassType_descriptor();
+inline const ::std::string& ClassType_Name(ClassType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ImageDescrip_ClassType_descriptor(), value);
+    ClassType_descriptor(), value);
 }
-inline bool ImageDescrip_ClassType_Parse(
-    const ::std::string& name, ImageDescrip_ClassType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ImageDescrip_ClassType>(
-    ImageDescrip_ClassType_descriptor(), name, value);
+inline bool ClassType_Parse(
+    const ::std::string& name, ClassType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ClassType>(
+    ClassType_descriptor(), name, value);
 }
-enum ImageDescrip_DataType {
-  ImageDescrip_DataType_TRAIN = 0,
-  ImageDescrip_DataType_TEST = 1
+enum DataType {
+  TRAIN = 0,
+  TEST = 1
 };
-bool ImageDescrip_DataType_IsValid(int value);
-const ImageDescrip_DataType ImageDescrip_DataType_DataType_MIN = ImageDescrip_DataType_TRAIN;
-const ImageDescrip_DataType ImageDescrip_DataType_DataType_MAX = ImageDescrip_DataType_TEST;
-const int ImageDescrip_DataType_DataType_ARRAYSIZE = ImageDescrip_DataType_DataType_MAX + 1;
+bool DataType_IsValid(int value);
+const DataType DataType_MIN = TRAIN;
+const DataType DataType_MAX = TEST;
+const int DataType_ARRAYSIZE = DataType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ImageDescrip_DataType_descriptor();
-inline const ::std::string& ImageDescrip_DataType_Name(ImageDescrip_DataType value) {
+const ::google::protobuf::EnumDescriptor* DataType_descriptor();
+inline const ::std::string& DataType_Name(DataType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ImageDescrip_DataType_descriptor(), value);
+    DataType_descriptor(), value);
 }
-inline bool ImageDescrip_DataType_Parse(
-    const ::std::string& name, ImageDescrip_DataType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ImageDescrip_DataType>(
-    ImageDescrip_DataType_descriptor(), name, value);
+inline bool DataType_Parse(
+    const ::std::string& name, DataType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<DataType>(
+    DataType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -205,58 +209,6 @@ class ImageDescrip :
 
   // nested types ----------------------------------------------------
 
-  typedef ImageDescrip_ClassType ClassType;
-  static const ClassType NEG =
-    ImageDescrip_ClassType_NEG;
-  static const ClassType POS =
-    ImageDescrip_ClassType_POS;
-  static inline bool ClassType_IsValid(int value) {
-    return ImageDescrip_ClassType_IsValid(value);
-  }
-  static const ClassType ClassType_MIN =
-    ImageDescrip_ClassType_ClassType_MIN;
-  static const ClassType ClassType_MAX =
-    ImageDescrip_ClassType_ClassType_MAX;
-  static const int ClassType_ARRAYSIZE =
-    ImageDescrip_ClassType_ClassType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  ClassType_descriptor() {
-    return ImageDescrip_ClassType_descriptor();
-  }
-  static inline const ::std::string& ClassType_Name(ClassType value) {
-    return ImageDescrip_ClassType_Name(value);
-  }
-  static inline bool ClassType_Parse(const ::std::string& name,
-      ClassType* value) {
-    return ImageDescrip_ClassType_Parse(name, value);
-  }
-
-  typedef ImageDescrip_DataType DataType;
-  static const DataType TRAIN =
-    ImageDescrip_DataType_TRAIN;
-  static const DataType TEST =
-    ImageDescrip_DataType_TEST;
-  static inline bool DataType_IsValid(int value) {
-    return ImageDescrip_DataType_IsValid(value);
-  }
-  static const DataType DataType_MIN =
-    ImageDescrip_DataType_DataType_MIN;
-  static const DataType DataType_MAX =
-    ImageDescrip_DataType_DataType_MAX;
-  static const int DataType_ARRAYSIZE =
-    ImageDescrip_DataType_DataType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  DataType_descriptor() {
-    return ImageDescrip_DataType_descriptor();
-  }
-  static inline const ::std::string& DataType_Name(DataType value) {
-    return ImageDescrip_DataType_Name(value);
-  }
-  static inline bool DataType_Parse(const ::std::string& name,
-      DataType* value) {
-    return ImageDescrip_DataType_Parse(name, value);
-  }
-
   // accessors -------------------------------------------------------
 
   // repeated float imghog = 2 [packed = true];
@@ -286,19 +238,19 @@ class ImageDescrip :
   ::std::string* release_imgpath();
   void set_allocated_imgpath(::std::string* imgpath);
 
-  // optional .dataset.ImageDescrip.ClassType classtype = 3;
+  // optional .dataset.ClassType classtype = 3;
   bool has_classtype() const;
   void clear_classtype();
   static const int kClasstypeFieldNumber = 3;
-  ::dataset::ImageDescrip_ClassType classtype() const;
-  void set_classtype(::dataset::ImageDescrip_ClassType value);
+  ::dataset::ClassType classtype() const;
+  void set_classtype(::dataset::ClassType value);
 
-  // optional .dataset.ImageDescrip.DataType datatype = 4;
+  // optional .dataset.DataType datatype = 4;
   bool has_datatype() const;
   void clear_datatype();
   static const int kDatatypeFieldNumber = 4;
-  ::dataset::ImageDescrip_DataType datatype() const;
-  void set_datatype(::dataset::ImageDescrip_DataType value);
+  ::dataset::DataType datatype() const;
+  void set_datatype(::dataset::DataType value);
 
   // @@protoc_insertion_point(class_scope:dataset.ImageDescrip)
  private:
@@ -430,6 +382,20 @@ class hog :
   const ::google::protobuf::RepeatedPtrField< ::dataset::ImageDescrip >&
       image() const;
 
+  // optional .dataset.ClassType classtype = 2;
+  bool has_classtype() const;
+  void clear_classtype();
+  static const int kClasstypeFieldNumber = 2;
+  ::dataset::ClassType classtype() const;
+  void set_classtype(::dataset::ClassType value);
+
+  // optional .dataset.DataType datatype = 3;
+  bool has_datatype() const;
+  void clear_datatype();
+  static const int kDatatypeFieldNumber = 3;
+  ::dataset::DataType datatype() const;
+  void set_datatype(::dataset::DataType value);
+
   // @@protoc_insertion_point(class_scope:dataset.hog)
  private:
   class HasBitSetters;
@@ -438,6 +404,134 @@ class hog :
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::dataset::ImageDescrip > image_;
+  int classtype_;
+  int datatype_;
+  friend struct ::TableStruct_dataset_2ehog_2eproto;
+};
+// -------------------------------------------------------------------
+
+class hogdataset :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dataset.hogdataset) */ {
+ public:
+  hogdataset();
+  virtual ~hogdataset();
+
+  hogdataset(const hogdataset& from);
+
+  inline hogdataset& operator=(const hogdataset& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  hogdataset(hogdataset&& from) noexcept
+    : hogdataset() {
+    *this = ::std::move(from);
+  }
+
+  inline hogdataset& operator=(hogdataset&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return default_instance().GetDescriptor();
+  }
+  static const hogdataset& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const hogdataset* internal_default_instance() {
+    return reinterpret_cast<const hogdataset*>(
+               &_hogdataset_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  void Swap(hogdataset* other);
+  friend void swap(hogdataset& a, hogdataset& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline hogdataset* New() const final {
+    return CreateMaybeMessage<hogdataset>(nullptr);
+  }
+
+  hogdataset* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<hogdataset>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const hogdataset& from);
+  void MergeFrom(const hogdataset& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(hogdataset* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .dataset.hog data = 1;
+  int data_size() const;
+  void clear_data();
+  static const int kDataFieldNumber = 1;
+  ::dataset::hog* mutable_data(int index);
+  ::google::protobuf::RepeatedPtrField< ::dataset::hog >*
+      mutable_data();
+  const ::dataset::hog& data(int index) const;
+  ::dataset::hog* add_data();
+  const ::google::protobuf::RepeatedPtrField< ::dataset::hog >&
+      data() const;
+
+  // @@protoc_insertion_point(class_scope:dataset.hogdataset)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::dataset::hog > data_;
   friend struct ::TableStruct_dataset_2ehog_2eproto;
 };
 // ===================================================================
@@ -541,7 +635,7 @@ ImageDescrip::mutable_imghog() {
   return &imghog_;
 }
 
-// optional .dataset.ImageDescrip.ClassType classtype = 3;
+// optional .dataset.ClassType classtype = 3;
 inline bool ImageDescrip::has_classtype() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -549,18 +643,18 @@ inline void ImageDescrip::clear_classtype() {
   classtype_ = 0;
   _has_bits_[0] &= ~0x00000002u;
 }
-inline ::dataset::ImageDescrip_ClassType ImageDescrip::classtype() const {
+inline ::dataset::ClassType ImageDescrip::classtype() const {
   // @@protoc_insertion_point(field_get:dataset.ImageDescrip.classtype)
-  return static_cast< ::dataset::ImageDescrip_ClassType >(classtype_);
+  return static_cast< ::dataset::ClassType >(classtype_);
 }
-inline void ImageDescrip::set_classtype(::dataset::ImageDescrip_ClassType value) {
-  assert(::dataset::ImageDescrip_ClassType_IsValid(value));
+inline void ImageDescrip::set_classtype(::dataset::ClassType value) {
+  assert(::dataset::ClassType_IsValid(value));
   _has_bits_[0] |= 0x00000002u;
   classtype_ = value;
   // @@protoc_insertion_point(field_set:dataset.ImageDescrip.classtype)
 }
 
-// optional .dataset.ImageDescrip.DataType datatype = 4;
+// optional .dataset.DataType datatype = 4;
 inline bool ImageDescrip::has_datatype() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -568,12 +662,12 @@ inline void ImageDescrip::clear_datatype() {
   datatype_ = 0;
   _has_bits_[0] &= ~0x00000004u;
 }
-inline ::dataset::ImageDescrip_DataType ImageDescrip::datatype() const {
+inline ::dataset::DataType ImageDescrip::datatype() const {
   // @@protoc_insertion_point(field_get:dataset.ImageDescrip.datatype)
-  return static_cast< ::dataset::ImageDescrip_DataType >(datatype_);
+  return static_cast< ::dataset::DataType >(datatype_);
 }
-inline void ImageDescrip::set_datatype(::dataset::ImageDescrip_DataType value) {
-  assert(::dataset::ImageDescrip_DataType_IsValid(value));
+inline void ImageDescrip::set_datatype(::dataset::DataType value) {
+  assert(::dataset::DataType_IsValid(value));
   _has_bits_[0] |= 0x00000004u;
   datatype_ = value;
   // @@protoc_insertion_point(field_set:dataset.ImageDescrip.datatype)
@@ -613,9 +707,83 @@ hog::image() const {
   return image_;
 }
 
+// optional .dataset.ClassType classtype = 2;
+inline bool hog::has_classtype() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void hog::clear_classtype() {
+  classtype_ = 0;
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline ::dataset::ClassType hog::classtype() const {
+  // @@protoc_insertion_point(field_get:dataset.hog.classtype)
+  return static_cast< ::dataset::ClassType >(classtype_);
+}
+inline void hog::set_classtype(::dataset::ClassType value) {
+  assert(::dataset::ClassType_IsValid(value));
+  _has_bits_[0] |= 0x00000001u;
+  classtype_ = value;
+  // @@protoc_insertion_point(field_set:dataset.hog.classtype)
+}
+
+// optional .dataset.DataType datatype = 3;
+inline bool hog::has_datatype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void hog::clear_datatype() {
+  datatype_ = 0;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::dataset::DataType hog::datatype() const {
+  // @@protoc_insertion_point(field_get:dataset.hog.datatype)
+  return static_cast< ::dataset::DataType >(datatype_);
+}
+inline void hog::set_datatype(::dataset::DataType value) {
+  assert(::dataset::DataType_IsValid(value));
+  _has_bits_[0] |= 0x00000002u;
+  datatype_ = value;
+  // @@protoc_insertion_point(field_set:dataset.hog.datatype)
+}
+
+// -------------------------------------------------------------------
+
+// hogdataset
+
+// repeated .dataset.hog data = 1;
+inline int hogdataset::data_size() const {
+  return data_.size();
+}
+inline void hogdataset::clear_data() {
+  data_.Clear();
+}
+inline ::dataset::hog* hogdataset::mutable_data(int index) {
+  // @@protoc_insertion_point(field_mutable:dataset.hogdataset.data)
+  return data_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::dataset::hog >*
+hogdataset::mutable_data() {
+  // @@protoc_insertion_point(field_mutable_list:dataset.hogdataset.data)
+  return &data_;
+}
+inline const ::dataset::hog& hogdataset::data(int index) const {
+  // @@protoc_insertion_point(field_get:dataset.hogdataset.data)
+  return data_.Get(index);
+}
+inline ::dataset::hog* hogdataset::add_data() {
+  // @@protoc_insertion_point(field_add:dataset.hogdataset.data)
+  return data_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::dataset::hog >&
+hogdataset::data() const {
+  // @@protoc_insertion_point(field_list:dataset.hogdataset.data)
+  return data_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 
@@ -626,15 +794,15 @@ hog::image() const {
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::dataset::ImageDescrip_ClassType> : ::std::true_type {};
+template <> struct is_proto_enum< ::dataset::ClassType> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::dataset::ImageDescrip_ClassType>() {
-  return ::dataset::ImageDescrip_ClassType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::dataset::ClassType>() {
+  return ::dataset::ClassType_descriptor();
 }
-template <> struct is_proto_enum< ::dataset::ImageDescrip_DataType> : ::std::true_type {};
+template <> struct is_proto_enum< ::dataset::DataType> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::dataset::ImageDescrip_DataType>() {
-  return ::dataset::ImageDescrip_DataType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::dataset::DataType>() {
+  return ::dataset::DataType_descriptor();
 }
 
 }  // namespace protobuf

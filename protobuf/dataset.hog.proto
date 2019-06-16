@@ -2,23 +2,31 @@
 syntax = "proto2";
 package dataset; 
 
+enum ClassType {
+   NEG = 0;
+   POS = 1;
+}
+enum DataType{
+   TRAIN = 0;
+   TEST = 1;
+}
+
 message ImageDescrip
 { 
    required string    imgpath = 1;  // image path
    repeated float     imghog = 2 [packed=true];  // the descriptor
-   enum ClassType {
-      NEG = 0;
-      POS = 1;
-   }
-   enum DataType{
-      TRAIN = 0;
-      TEST = 1;
-   }
    optional ClassType classtype = 3 ;
    optional DataType datatype = 4 ;
 }
 
-message hog
+message hog //if all images in belongs to the same class type or datatype
 {
    repeated ImageDescrip image = 1;
+   optional ClassType classtype = 2;
+   optional DataType datatype = 3;
+}
+
+message hogdataset
+{
+   repeated hog data = 1;
 }

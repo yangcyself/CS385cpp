@@ -42,8 +42,8 @@ void addAnImage(dataset::ImageDescrip * dscrp, HOGDescriptor& d,
     Mat img = imread(imgpath, 0); // load as color image
     d.compute( img, descriptorsValues, Size(0,0), Size(0,0), locations);
     dscrp -> set_imgpath(imgpath);
-    dscrp -> set_classtype(classtype=="pos"? dataset::ImageDescrip::POS : dataset::ImageDescrip::NEG );
-    dscrp -> set_datatype(datatype=="train"? dataset::ImageDescrip::TRAIN : dataset::ImageDescrip::TEST);
+    dscrp -> set_classtype(classtype=="pos"? dataset::POS : dataset::NEG );
+    dscrp -> set_datatype(datatype=="train"? dataset::TRAIN : dataset::TEST);
     for (int i = 0;i< descriptorsValues.size();i++){
         dscrp -> add_imghog(descriptorsValues[i]);
     }
@@ -52,9 +52,10 @@ void addAnImage(dataset::ImageDescrip * dscrp, HOGDescriptor& d,
 /**
  * To read all image names in a dir and call addAnImage
  */
-void processAllImg(dataset::hog& imagehogs, HOGDescriptor& d,string datatype, string classtype)
+void processAllImg(dataset::hog* imagehogs, HOGDescriptor& d,string datatype, string classtype)
 {
-    
+    imagehogs -> set_classtype(classtype=="pos"? dataset::POS : dataset::NEG );
+    imagehogs -> set_datatype(datatype=="train"? dataset::TRAIN : dataset::TEST);
     // cout<<"[@]1"<<endl;
     string dir = ImgFolder + "/" + datatype + "/" + classtype;
     // cout<<"[@]2"<< dir <<endl;
@@ -68,7 +69,7 @@ void processAllImg(dataset::hog& imagehogs, HOGDescriptor& d,string datatype, st
         if(string(dirp->d_name).size() < 5)
             continue; //dirp can be "."
         // cout<<"[@]3 "<<string(dirp->d_name)<<endl;
-        addAnImage(imagehogs.add_image(),d,datatype,classtype,dirp->d_name);
+        addAnImage(imagehogs->add_image(),d,datatype,classtype,dirp->d_name);
         // cout<<"[@]2"<<endl;
     }
     closedir(dp);
@@ -90,13 +91,15 @@ int main( int argc, char** argv )
         // //nlevels=64
     );
     cout<<"[*]1"<<endl;
-    dataset::hog imagehogs; 
+    // dataset::hog imagehogs; 
+    dataset::hogdataset imagehogs; 
+
     cout<<"[*]2"<<endl;
-    processAllImg(imagehogs,d,"train","pos");
+    processAllImg(imagehogs.add_data(),d,"train","pos");
     cout<<"[*]3"<<endl;
-    processAllImg(imagehogs,d,"train","neg");
-    processAllImg(imagehogs,d,"test","pos");
-    processAllImg(imagehogs,d,"test","neg");
+    processAllImg(imagehogs.add_data(),d,"train","neg");
+    processAllImg(imagehogs.add_data(),d,"test","pos");
+    processAllImg(imagehogs.add_data(),d,"test","neg");
     cout<<"[*]4"<<endl;
     fstream output("./out/hog.ptbf", ios::out | ios::trunc | ios::binary); 
 
