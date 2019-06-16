@@ -36,7 +36,16 @@ Logistictor::forward(const Logistictor::matrix& X)const
 {
     matrix aX = augment(X);
     vector logit = aX*beta;
-    return logit.unaryExpr(&sigmoid);
+    return logit.unaryExpr(std::ptr_fun(sigmoid));
+    /**
+     * IMPORTANT: CANNOT USE THIS LINE IF 
+     * -I/home/yangcy/programs/eigen instead of $(pkg-config --cflags eigen3) in compile
+     * the error message is "error: base type ‘double (*)(double)’ fails to be a struct or class type" 
+     *  if use the following line
+     * XIT!
+     */
+    // return logit.unaryExpr(&(sigmoid)); 
+
 }
 
 void 
