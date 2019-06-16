@@ -27,7 +27,7 @@ public:
      */
     MatrixDataset(std::string protoPath, bool test = false);
 
-    ~MatrixDataset();
+    ~MatrixDataset(){}
 
     /**
      * return the related objects in this dataset

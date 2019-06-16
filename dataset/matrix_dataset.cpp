@@ -47,19 +47,18 @@ MatrixDataset::MatrixDataset(std::string protoPath, bool test)
             inx = tmpx;
             iny = tmpy;
         }else{
-            matrix tx(inx.rows(), p);
+            matrix tx(inx.rows() + tmpx.rows() , p);
             tx << inx, tmpx;
-            vector ty(iny.rows());
+            vector ty(iny.rows() + tmpy.rows());
             ty << iny, tmpy;
             inx = tx;
             iny = ty;
         }
-        n += inx.rows();
+        n += tmpx.rows();
     }
     x = inx;
     y = iny;
     std::cout<< "LOADED MATRIX " << n <<" * "<< p << std::endl;
-    return 0;
 }
 
 }// namespace dataset
