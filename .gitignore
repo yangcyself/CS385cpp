@@ -7,3 +7,4 @@ CMakeFiles/*
 out/*
 build/*
 protobuf/log
+tmp/*

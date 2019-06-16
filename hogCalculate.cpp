@@ -55,9 +55,9 @@ void addAnImage(dataset::ImageDescrip * dscrp, HOGDescriptor& d,
 void processAllImg(dataset::hog& imagehogs, HOGDescriptor& d,string datatype, string classtype)
 {
     
-    cout<<"[@]1"<<endl;
+    // cout<<"[@]1"<<endl;
     string dir = ImgFolder + "/" + datatype + "/" + classtype;
-    cout<<"[@]2"<< dir <<endl;
+    // cout<<"[@]2"<< dir <<endl;
     DIR *dp;
     struct dirent *dirp;
     if((dp  = opendir(dir.c_str())) == NULL) {
@@ -65,9 +65,11 @@ void processAllImg(dataset::hog& imagehogs, HOGDescriptor& d,string datatype, st
         return;
     }
     while ((dirp = readdir(dp)) != NULL) {
-        cout<<"[@]3"<<string(dirp->d_name)<<endl;
+        if(string(dirp->d_name).size() < 5)
+            continue; //dirp can be "."
+        // cout<<"[@]3 "<<string(dirp->d_name)<<endl;
         addAnImage(imagehogs.add_image(),d,datatype,classtype,dirp->d_name);
-        cout<<"[@]2"<<endl;
+        // cout<<"[@]2"<<endl;
     }
     closedir(dp);
 }
