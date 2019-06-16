@@ -1,0 +1,23 @@
+CC=g++
+CFLAGS=-I.
+
+CXX_FLAGS = -std=c++11  
+CXX_DEFINES = 
+CXX_INCLUDES = -isystem /usr/local/include/opencv4
+
+OPENCV_LIBS = -rdynamic /usr/local/lib/libopencv_dnn.so.4.0.1 /usr/local/lib/libopencv_ml.so.4.0.1 /usr/local/lib/libopencv_photo.so.4.0.1 /usr/local/lib/libopencv_gapi.so.4.0.1 /usr/local/lib/libopencv_stitching.so.4.0.1 /usr/local/lib/libopencv_video.so.4.0.1 /usr/local/lib/libopencv_objdetect.so.4.0.1 /usr/local/lib/libopencv_calib3d.so.4.0.1 /usr/local/lib/libopencv_features2d.so.4.0.1 /usr/local/lib/libopencv_flann.so.4.0.1 /usr/local/lib/libopencv_highgui.so.4.0.1 /usr/local/lib/libopencv_videoio.so.4.0.1 /usr/local/lib/libopencv_imgcodecs.so.4.0.1 /usr/local/lib/libopencv_imgproc.so.4.0.1 /usr/local/lib/libopencv_core.so.4.0.1 -Wl,-rpath,/usr/local/lib 
+
+all: processImage hogVisualize
+
+processImage: processImage.cpp.o
+	/usr/bin/c++   -std=c++11   build/processImage.cpp.o  -o processImage $(OPENCV_LIBS)
+
+processImage.cpp.o: processImage.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o build/processImage.cpp.o -c processImage.cpp
+
+
+hogVisualize: hogVisualize.cpp.o
+	/usr/bin/c++   -std=c++11   build/hogVisualize.cpp.o  -o hogVisualize $(OPENCV_LIBS)
+
+hogVisualize.cpp.o: hogVisualize.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o build/hogVisualize.cpp.o -c hogVisualize.cpp

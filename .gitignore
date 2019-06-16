@@ -1,0 +1,9 @@
+CMakeCache.txt
+
+cmake_install.cmake
+
+.vscode/*
+CMakeFiles/*
+out/*
+build/*
+protobuf/log

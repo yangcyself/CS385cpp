@@ -1,0 +1,24 @@
+//protoc -I=. --cpp_out=. ./dataset.hog.proto
+syntax = "proto2";
+package dataset; 
+
+message ImageDescrip
+{ 
+   required string    imgpath = 1;  // image path
+   repeated float     imghog = 2 [packed=true];  // the descriptor
+   enum ClassType {
+      NEG = 0;
+      POS = 1;
+   }
+   enum DataType{
+      TRAIN = 0;
+      TEST = 1;
+   }
+   optional ClassType classtype = 3 ;
+   optional DataType datatype = 4 ;
+}
+
+message hog
+{
+   repeated ImageDescrip image = 1;
+}

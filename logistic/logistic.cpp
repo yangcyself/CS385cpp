@@ -1,0 +1,68 @@
+#include <logistic/logistic.h>
+
+// #include <stdio.h>
+#include <iostream>
+namespace logistic{
+
+/**
+ * The sigmoid function given Xbeta as x
+ */
+double sigmoid(double x) // the functor we want to apply
+{
+    return 1/( 1 + std::exp(-x) );
+}
+
+
+Logistictor::Logistictor(int p):beta(p+1)
+{
+    // beta << 1,0,2; //just for debug
+    beta<<vector::Random(p+1);
+}
+
+
+Logistictor::~Logistictor()
+{}
+
+Logistictor::matrix
+Logistictor::augment(const Logistictor::matrix& X )const
+{
+    matrix aX(X.rows(), X.cols()+1); // the larger X concated with one vector
+    aX << X, matrix::Constant(X.rows(), 1, 1.0);
+    return aX;
+}
+
+Logistictor::vector
+Logistictor::forward(const Logistictor::matrix& X)const
+{
+    matrix aX = augment(X);
+    vector logit = aX*beta;
+    return logit.unaryExpr(&sigmoid);
+}
+
+void 
+Logistictor::train(const Logistictor::vector& Y, const Logistictor::matrix& X, 
+                        const int steps, const double lr, double lgv)
+{
+    matrix aX = augment(X);
+    for(int i = 0;i<steps;i++){
+        vector p = forward(X); // probability
+        // vector d = (X.rowwise().transpose()*(Y-p)).sum(); //derivative
+        vector dyp = Y-p;
+        vector d = dyp.transpose()*aX; //derivative n
+        // vector d = dm.transpose().colwise().sum();
+        // std::cout<<d<<std::endl;
+        beta += lr*d;
+
+        //Langevin:
+        if(lgv>0.000001){
+            vector mean = vector::Zero(beta.rows());
+            matrix cov = matrix::Identity(beta.rows(),beta.rows());
+            cov = cov * lgv;
+            Eigen::EigenMultivariateNormal<double> normx(mean,cov);
+            beta += normx.samples(1);
+        }
+    }
+}
+
+
+} // name space logistic
