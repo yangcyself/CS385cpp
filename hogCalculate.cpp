@@ -18,11 +18,6 @@
 
 using namespace cv;
 using namespace std;
-// using std::vector;
-// using std::cin;
-// using std::cout;
-// using std::endl;
-// using std::string;
 
 const string HogFile = "";
 const string ImgFolder = "./out";
@@ -57,9 +52,12 @@ void addAnImage(dataset::ImageDescrip * dscrp, HOGDescriptor& d,
 /**
  * To read all image names in a dir and call addAnImage
  */
-void processAllImg(dataset::hog& imagehogs, HOGDescriptor d,string datatype, string classtype)
+void processAllImg(dataset::hog& imagehogs, HOGDescriptor& d,string datatype, string classtype)
 {
+    
+    cout<<"[@]1"<<endl;
     string dir = ImgFolder + "/" + datatype + "/" + classtype;
+    cout<<"[@]2"<< dir <<endl;
     DIR *dp;
     struct dirent *dirp;
     if((dp  = opendir(dir.c_str())) == NULL) {
@@ -67,15 +65,15 @@ void processAllImg(dataset::hog& imagehogs, HOGDescriptor d,string datatype, str
         return;
     }
     while ((dirp = readdir(dp)) != NULL) {
-        // cout<<string(dirp->d_name)<<endl;
+        cout<<"[@]3"<<string(dirp->d_name)<<endl;
         addAnImage(imagehogs.add_image(),d,datatype,classtype,dirp->d_name);
+        cout<<"[@]2"<<endl;
     }
     closedir(dp);
 }
 
 int main( int argc, char** argv )
 {
-
     HOGDescriptor d(
         Size(96,96), //winSize
         Size(32,32), //blocksize
@@ -89,11 +87,15 @@ int main( int argc, char** argv )
         // false //gamma correction,
         // //nlevels=64
     );
+    cout<<"[*]1"<<endl;
     dataset::hog imagehogs; 
+    cout<<"[*]2"<<endl;
     processAllImg(imagehogs,d,"train","pos");
+    cout<<"[*]3"<<endl;
     processAllImg(imagehogs,d,"train","neg");
     processAllImg(imagehogs,d,"test","pos");
     processAllImg(imagehogs,d,"test","neg");
+    cout<<"[*]4"<<endl;
     fstream output("./out/hog.ptbf", ios::out | ios::trunc | ios::binary); 
 
     if (!imagehogs.SerializeToOstream(&output)) { 
