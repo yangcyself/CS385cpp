@@ -1,6 +1,5 @@
 /**
- * failed g++ hogVisualize.cpp -o hogVisualize -I/usr/local/include/opencv4 $(pkg-config --libs opencv)
- * failed  g++ hogVisualize.cpp -o hogVisualize -I/usr/local/include/opencv4 -L/usr/local/lib opencv_flann opencv_dnn opencv_core opencv_ml opencv_photo opencv_calib3d opencv_imgcodecs opencv_videoio opencv_gapi opencv_imgproc opencv_highgui opencv_stitching opencv_features2d opencv_video opencv_objdetect -lrt -lpthread -lm -ldl
+ * 
  */
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgcodecs/imgcodecs.hpp>
