@@ -19,22 +19,23 @@ private:
     vector y;
     int n;
     int p;
+    
 public:
     /**
      * constructor:
      * load the protoPath's data, and forms X and Y
      */
-    MatrixDataset(std::string protoPath, bool train = true);
+    MatrixDataset(std::string protoPath, bool test = false);
 
     ~MatrixDataset();
 
     /**
      * return the related objects in this dataset
      */
-    vector Y();
-    matrix X();
-    int N();
-    int P();
+    vector Y()const {return y;}
+    matrix X()const {return x;}
+    int N() const {return n;}
+    int P() const {return p;}
 };
 
 
