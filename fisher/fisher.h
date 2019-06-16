@@ -49,4 +49,4 @@ public:
 
 } /* namespace logistic */
 
-#endif //TOWR_MODELS_DYNAMIC_MODEL_H_
+#endif //LOGISTIC_H_

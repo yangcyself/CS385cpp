@@ -87,4 +87,4 @@ fisheror::train(const fisheror::vector& Y, const fisheror::matrix& X)
 }
 
 
-} // name space logistic
+} // name space fisher
