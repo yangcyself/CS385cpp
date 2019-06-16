@@ -1,13 +1,15 @@
-CC=g++
-CFLAGS=-I.
+# CC=g++
+# CFLAGS=-I.
 
-CXX_FLAGS = -std=c++11  
-CXX_DEFINES = 
-CXX_INCLUDES = -pthread -I/usr/local/include -isystem /usr/local/include/opencv4  -I/home/yangcy/programs/eigen -I.
+# CXX_FLAGS = -std=c++11  
+# CXX_DEFINES = 
+# CXX_INCLUDES = -pthread -I/usr/local/include -isystem /usr/local/include/opencv4  -I/home/yangcy/programs/eigen -I.
 
-OPENCV_LIBS = -rdynamic /usr/local/lib/libopencv_dnn.so.4.0.1 /usr/local/lib/libopencv_ml.so.4.0.1 /usr/local/lib/libopencv_photo.so.4.0.1 /usr/local/lib/libopencv_gapi.so.4.0.1 /usr/local/lib/libopencv_stitching.so.4.0.1 /usr/local/lib/libopencv_video.so.4.0.1 /usr/local/lib/libopencv_objdetect.so.4.0.1 /usr/local/lib/libopencv_calib3d.so.4.0.1 /usr/local/lib/libopencv_features2d.so.4.0.1 /usr/local/lib/libopencv_flann.so.4.0.1 /usr/local/lib/libopencv_highgui.so.4.0.1 /usr/local/lib/libopencv_videoio.so.4.0.1 /usr/local/lib/libopencv_imgcodecs.so.4.0.1 /usr/local/lib/libopencv_imgproc.so.4.0.1 /usr/local/lib/libopencv_core.so.4.0.1 -Wl,-rpath,/usr/local/lib 
-PROTBF_LIBS = $(shell pkg-config --libs protobuf)
+# OPENCV_LIBS = -rdynamic /usr/local/lib/libopencv_dnn.so.4.0.1 /usr/local/lib/libopencv_ml.so.4.0.1 /usr/local/lib/libopencv_photo.so.4.0.1 /usr/local/lib/libopencv_gapi.so.4.0.1 /usr/local/lib/libopencv_stitching.so.4.0.1 /usr/local/lib/libopencv_video.so.4.0.1 /usr/local/lib/libopencv_objdetect.so.4.0.1 /usr/local/lib/libopencv_calib3d.so.4.0.1 /usr/local/lib/libopencv_features2d.so.4.0.1 /usr/local/lib/libopencv_flann.so.4.0.1 /usr/local/lib/libopencv_highgui.so.4.0.1 /usr/local/lib/libopencv_videoio.so.4.0.1 /usr/local/lib/libopencv_imgcodecs.so.4.0.1 /usr/local/lib/libopencv_imgproc.so.4.0.1 /usr/local/lib/libopencv_core.so.4.0.1 -Wl,-rpath,/usr/local/lib 
+# PROTBF_LIBS = $(shell pkg-config --libs protobuf)
 
+include .env
+export 
 
 all: processImage hogVisualize  writer reader hogCalculate hogOutVisualize  test_dataset_main logisticMain fisherMain
 
