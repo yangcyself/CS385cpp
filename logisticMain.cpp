@@ -1,7 +1,7 @@
 /**
  * usage
  * 
- * g++ -I/home/yangcy/programs/eigen -I. logisticMain.cpp logistic/logistic.cpp dataset/matrix_dataset.cpp -o logisticMain $(pkg-config --cflags --libs protobuf) -std=c++11
+ * g++ -I/home/yangcy/programs/eigen -I. logisticMain.cpp logistic/logistic.cpp dataset/matrix_dataset.cpp  protobuf/dataset.hog.pb.cc -o logisticMain $(pkg-config --cflags --libs protobuf) -std=c++11
  * ./logisticMain
  */
 
@@ -13,27 +13,27 @@ using namespace std;
 using namespace logistic;
 using namespace dataset;
 
-// double accuracy(MatrixDataset::vector y, MatrixDataset::vector y_)
-// {
+double accuracy(MatrixDataset::vector y, MatrixDataset::vector y_)
+{
     
-//     // MatrixDataset::vector y_pos = (y_.array() >= 0.5);
+    
+    Eigen::VectorXi y_pos = (y_.array() >= 0.5).cast <int> ();
+    Eigen::VectorXi y_neg = (y_.array() < 0.5).cast <int> ();
 
-//     Eigen::VectorXi y_neg = (y_.array() < 0.5).cast <int> ();
+    cout<<"y_pos.count() "<<y_pos.count()<<endl;
+    cout<<"y_neg.count() "<<y_neg.count()<<endl;
+    // int true_positive = (y * y_pos).sum();
+    // int true_negtive = (y * y_neg).sum();
+    // int false_positive = ((1.0-y) * y_pos).sum();
+    // int false_negtive = ((1.0-y) * y_neg).sum();
+    // cout<<"true_positive"<<true_positive<<endl;
+    // cout<<"true_negtive"<<true_negtive<<endl;
+    // cout<<"false_positive"<<false_positive<<endl;
+    // cout<<"false_negtive"<<false_negtive<<endl;
 
-//     // cout<<"y_pos.count() "<<y_pos.count()<<endl;
-//     // cout<<"y_neg.count() "<<y_neg.count()<<endl;
-//     // int true_positive = (y * y_pos).sum();
-//     // int true_negtive = (y * y_neg).sum();
-//     // int false_positive = ((1.0-y) * y_pos).sum();
-//     // int false_negtive = ((1.0-y) * y_neg).sum();
-//     // cout<<"true_positive"<<true_positive<<endl;
-//     // cout<<"true_negtive"<<true_negtive<<endl;
-//     // cout<<"false_positive"<<false_positive<<endl;
-//     // cout<<"false_negtive"<<false_negtive<<endl;
-
-//     // return (double) (true_positive + false_negtive) / y.rows();
-//     return 0.5;
-// }
+    // return (double) (true_positive + false_negtive) / y.rows();
+    return 0.5;
+}
 
 int main(int argc, char const *argv[])
 {
@@ -45,12 +45,13 @@ int main(int argc, char const *argv[])
     MatrixDataset::matrix testX = TestDataset.X();
     MatrixDataset::vector testY = TestDataset.Y();
 
+    int p = TrainDataset.P();
+    Logistictor a(p);
+    
+    a.train(trainY,trainX,100,0.1,0.001);
 
-    // Logistictor a(3);
-    // a.train(trainY,trainX,100,0.1,0.001);
-    // // cout<<"X:/n"<<X<<"Y:/n"<<Y<<endl;
-    // MatrixDataset::vector trainY_ = a.forward(trainX);
-    // cout<<"train accuracy: "<<accuracy(trainY, trainY_);
+    MatrixDataset::vector trainY_ = a.forward(trainX);
+    cout<<"train accuracy: "<<accuracy(trainY, trainY_);
 
     // MatrixDataset::vector testY_ = a.forward(testX);
     

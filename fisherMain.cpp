@@ -8,20 +8,30 @@
 #include <fisher/fisher.h>
 #include <iostream>
 #include <Eigen/Dense>
+#include <dataset/matrix_dataset.h>
+
 using namespace std;
 using namespace fisher;
+using namespace dataset;
 
 int main(int argc, char const *argv[])
 {
+    MatrixDataset TrainDataset("./out/hog.ptbf",false);
+    MatrixDataset TestDataset("./out/hog.ptbf",true);
+
+    MatrixDataset::matrix trainX = TrainDataset.X();
+    MatrixDataset::vector trainY = TrainDataset.Y();
+    MatrixDataset::matrix testX = TestDataset.X();
+    MatrixDataset::vector testY = TestDataset.Y();
+
     fisheror a(2);
-    Eigen::MatrixXd X(3,2);
-    Eigen::Vector3d Y;
-    X << 0,2,
-         -1,-1,
-         2,0;
-    Y << 1,0,1;
-    a.train(Y,X);
+    a.train(trainY,trainX);
     // cout<<"X:/n"<<X<<"Y:/n"<<Y<<endl;
+    MatrixDataset::vector trainY_ = a.forward(trainX);
+    
+    MatrixDataset::vector testY_ = a.forward(testX);
+    
     cout<<"forward:\n"<<a.forward(X)<<endl;
+
     return 0;
 }
