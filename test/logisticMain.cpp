@@ -19,9 +19,15 @@ int main(int argc, char const *argv[])
          -2,2,-1,
          0,1,2;
     Y << 1,0,1;
-    cout<<a.forward(X)<<endl;
+    // cout<<a.forward(X)<<endl;
     a.train(Y,X,100,0.1,0.01);
-    cout<<a.forward(X)<<endl;
+
+    Eigen::VectorXd Y_ = a.forward(X);
+    Eigen::VectorXi Y_pos = (Y_.array()>0.5).cast <int> ();
+    cout<< "Y_pos:\n" << Y_pos <<endl;
+    cout<<"y_pos.sum(): "<< Y_pos.sum()<<endl;
+    cout<< (Y.cast <int> () ).transpose()* Y_pos<<endl; 
+
     return 0;
     // MatrixXd a(2,2);
     // MatrixXi b(2,2);

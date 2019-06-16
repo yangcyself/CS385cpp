@@ -13,26 +13,28 @@ using namespace std;
 using namespace logistic;
 using namespace dataset;
 
-double accuracy(MatrixDataset::vector y, MatrixDataset::vector y_)
+double accuracy(Eigen::VectorXd y, Eigen::VectorXd y_)
 {
     
-    
+    Eigen::VectorXi y_true = y.cast <int> ();
+    Eigen::VectorXi y_false = (1-y.array()).cast <int> ();
     Eigen::VectorXi y_pos = (y_.array() >= 0.5).cast <int> ();
     Eigen::VectorXi y_neg = (y_.array() < 0.5).cast <int> ();
-
-    cout<<"y_pos.count() "<<y_pos.count()<<endl;
-    cout<<"y_neg.count() "<<y_neg.count()<<endl;
-    // int true_positive = (y * y_pos).sum();
-    // int true_negtive = (y * y_neg).sum();
-    // int false_positive = ((1.0-y) * y_pos).sum();
-    // int false_negtive = ((1.0-y) * y_neg).sum();
+    // cout<<"y_.head(100): \n"<<y_.head(100)<<endl;
+    // cout<<"y_pos.shape: "<< y_pos.rows()<<endl;
+    // cout<<"y_pos.count() "<<y_pos.sum()<<endl;
+    // cout<<"y_neg.count() "<<y_neg.sum()<<endl;
+    int true_positive = y_true.transpose() * y_pos;
+    int true_negtive = y_true.transpose() * y_neg;
+    int false_positive = y_false.transpose() * y_pos;
+    int false_negtive = y_false.transpose() * y_neg;
     // cout<<"true_positive"<<true_positive<<endl;
     // cout<<"true_negtive"<<true_negtive<<endl;
     // cout<<"false_positive"<<false_positive<<endl;
     // cout<<"false_negtive"<<false_negtive<<endl;
 
-    // return (double) (true_positive + false_negtive) / y.rows();
-    return 0.5;
+    return (double) (true_positive + false_negtive) / y.rows();
+    // return 0.5;
 }
 
 int main(int argc, char const *argv[])
@@ -40,18 +42,24 @@ int main(int argc, char const *argv[])
     MatrixDataset TrainDataset("./out/hog.ptbf",false);
     MatrixDataset TestDataset("./out/hog.ptbf",true);
 
-    MatrixDataset::matrix trainX = TrainDataset.X();
-    MatrixDataset::vector trainY = TrainDataset.Y();
+    // MatrixDataset::matrix trainX = TrainDataset.X();
+    // MatrixDataset::vector trainY = TrainDataset.Y();
     MatrixDataset::matrix testX = TestDataset.X();
     MatrixDataset::vector testY = TestDataset.Y();
-
+    Eigen::VectorXd testY_;
     int p = TrainDataset.P();
     Logistictor a(p);
-    
-    a.train(trainY,trainX,100,0.1,0.001);
+    cout<<"testX.mean \n"<<testX.mean()<<endl;
+    cout<<"testY.mean \n"<<testY.mean()<<endl;
+    // a.train(trainY,trainX,1,0.1,0.001);
 
-    MatrixDataset::vector trainY_ = a.forward(trainX);
-    cout<<"train accuracy: "<<accuracy(trainY, trainY_);
+    testY_ = a.forward(testX);
+    cout<<"train accuracy: "<<accuracy(testY, testY_)<<endl;
+
+    a.train(testY,testX,1,0.01,0);
+
+    testY_ = a.forward(testX);
+    cout<<"train accuracy: "<<accuracy(testY, testY_)<<endl;
 
     // MatrixDataset::vector testY_ = a.forward(testX);
     
