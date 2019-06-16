@@ -16,7 +16,7 @@
 #include <string>
 #include <errno.h>
 
-// #include <algorithm>    // std::min
+#include <algorithm>    // std::min
 
 using namespace cv;
 using namespace std;
@@ -58,8 +58,10 @@ void addAnImage(dataset::ImageDescrip * dscrp, HOGDescriptor& d,
          * So I clam it.
          * XIT
          */
-        if(descriptorsValues[i] == descriptorsValues[i])
-            dscrp -> add_imghog(descriptorsValues[i] > 1.0 ? 1.0:descriptorsValues[i]  );
+        if(descriptorsValues[i] == descriptorsValues[i]){
+            float t = descriptorsValues[i];
+            dscrp -> add_imghog(std::min(std::max(t,(float)-1.0 ),(float)1.0));
+        }
         else
             dscrp -> add_imghog(0);
     }

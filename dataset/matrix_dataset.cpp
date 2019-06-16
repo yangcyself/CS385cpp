@@ -26,24 +26,26 @@ MatrixDataset::MatrixDataset(std::string protoPath, bool test)
         if(imagehogs.datatype() != test)
             continue; 
         p = imagehogs.image(0).imghog_size();
-        matrix tmpx(imagehogs.image_size(),p);
-        vector tmpy(imagehogs.image_size());
+        matrix tmpx = matrix::Zero (imagehogs.image_size(),p);
+        vector tmpy = vector::Zero (imagehogs.image_size())  ;
         for (int i = 0;i <imagehogs.image_size();i++){
             const ImageDescrip& tmp = imagehogs.image(i);
 
-            // cout<< "num: "<<i<<"\t";
-            // cout<<"imgPath: "<<tmp.imgpath()<<"\n";
-            // cout<<"Classtype: "<<tmp.classtype()<<"\t";
-            // cout<<"Datatype: "<<tmp.datatype()<<"\t";
-            // cout<<"img hog: ";
             for (int j = 0;j<tmp.imghog_size();j++){
                 // cout << tmp.imghog(j)<<" ";
+                if(tmp.imghog(j) != tmp.imghog(j))
+                {
+                    std::cout<<"nan is at: "<< i<<" , "<<j<< " " <<tmp.imghog(j)<<std::endl;
+                }
+                // assert(tmp.imghog(j) == tmp.imghog(j)); //check nan
                 tmpx(i,j) = tmp.imghog(j);
             }
             tmpy(i) = tmp.classtype();
         }
         // concatenate inx
+        // std::cout<< "tmpx MEAN " << tmpx.mean() << std::endl;
         if(inx.cols()==1){ //inx is the empty matrix
+            
             inx = tmpx;
             iny = tmpy;
         }else{

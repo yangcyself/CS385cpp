@@ -25,9 +25,9 @@ int main(int argc, char const *argv[])
     cout<<"Trainx corner2: \n"<<trainX.block(100,870,20,20)<<" * "<<endl;
     
     cout<<"Trainx: "<<trainX.rows()<<" * "<<trainX.cols()<<"mean: "<< trainX.mean() <<endl;
-    cout<<"Trainy: "<<trainY.rows()<<" * "<<trainY.cols()<<endl;
-    cout<<"Testx: "<<testX.rows()<<" * "<<testX.cols()<<endl;
-    cout<<"Testy: "<<testY.rows()<<" * "<<testY.cols()<<endl;
+    cout<<"Trainy: "<<trainY.rows()<<" * "<<trainY.cols()<<"mean: "<< trainY.mean() <<endl;
+    cout<<"Testx: "<<testX.rows()<<" * "<<testX.cols()<<"mean: "<< testX.mean() <<endl;
+    cout<<"Testy: "<<testY.rows()<<" * "<<testY.cols()<<"mean: "<< testY.mean() <<endl;
     
     return 0;
 }
