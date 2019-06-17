@@ -1,5 +1,5 @@
 /**
- * g++ -I/home/yangcy/programs/eigen -I. test/testconv.cpp cnn/tensor.cpp -o  test/testconv -std=c++11
+ * g++ -I/home/yangcy/programs/eigen -I. test/testconv.cpp cnn/tensor.cpp -o  test/testconv -std=c++11 -Wall
  */
 #include <iostream>
 #include "cnn/tensor.h"
@@ -63,6 +63,10 @@ cout<<"#####4######"<<endl;
 
 cout<<"#####5######"<<endl;
   c = a.elemul(a);
+  c.print();
+
+cout<<"#####6######"<<endl; // kernel flip
+  c = b.kernelFlip();
   c.print();
 return 0;
 }
