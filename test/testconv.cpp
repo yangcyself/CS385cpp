@@ -57,7 +57,12 @@ cout<<"#####3######"<<endl;
   c = a.conv(b,-1,0,2);
   c.print();
 
+cout<<"#####4######"<<endl;
+  c = a.eleadd(a);
+  c.print();
 
-//   Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic,Eigen::RowMajor> > M2(b.data(), 2,2);
-//   cout << "M2:" << endl << M2 << endl;
+cout<<"#####5######"<<endl;
+  c = a.elemul(a);
+  c.print();
+
 }

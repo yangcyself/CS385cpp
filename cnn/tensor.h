@@ -59,12 +59,12 @@ public:
     /**
      * add with another tensor element wise, with the function of broadcast
      */
-    // Tensor eleadd(const Tensor& other);
+    Tensor eleadd(const Tensor& other);
 
     /**
      * multiply with another tensor element wise, with the function of broadcast
      */
-    // Tensor elemul(const Tensor& other);
+    Tensor elemul(const Tensor& other);
     
     void print();
 

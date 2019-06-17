@@ -149,6 +149,17 @@ Tensor::print()
     }
 }
 
-
+Tensor
+Tensor::eleadd(const Tensor& other)
+{
+    matrix out = data.array() + other.data.array();
+    return Tensor(out, H,W);
+}
+Tensor 
+Tensor::elemul(const Tensor& other)
+{
+    matrix out = data.array() * other.data.array();
+    return Tensor(out, H,W);
+}
 
 } // namespace convnn
