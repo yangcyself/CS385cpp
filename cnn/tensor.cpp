@@ -49,7 +49,7 @@ Tensor::matrix augment(Tensor a, int kh, int kw)
     Tensor::matrix out(C*kh*kw,h*w);
     for(int i = 0;i<kh;i++)
         for (int j = 0;j<kw;j++)
-            out.block(i*kw+j,0,C,w*h) = a.data(Eigen::all,ind.array()+j+i*W);
+            out.block((i*kw+j)*C,0,C,w*h) = a.data(Eigen::all,ind.array()+j+i*W);
 
     return out;
 }
@@ -78,14 +78,14 @@ Tensor::conv(const Tensor& kernel, int pad, double padv,int stride)const
     matrix kermat = kernel.data;
     int outc = kermat.rows();
     matrix out(n,H*W*outc);
-    std::cout<<"#0"<<std::endl;
+    // std::cout<<"#0"<<std::endl;
     for(int i = 0; i < n ;i++){
         matrix tmp = expand(i,inc,H*W); //inc * H*W
 
         /**
          * pad the matrix tmp
          */
-        std::cout<<"#1"<<std::endl;
+        // std::cout<<"#1"<<std::endl;
         int padh = pad; int padw = pad;
         if(pad==-1){
             padh = (kernel.H-1)/2;
@@ -96,19 +96,21 @@ Tensor::conv(const Tensor& kernel, int pad, double padv,int stride)const
         Eigen::VectorXi ind = ColomnBlockIndex( padedh , padedw , H , W);
         // std::cout << ind <<std::endl;
         padded(Eigen::all, ind.array() + padw + padh * padedw ) = tmp;
-        std::cout<<"#2"<<std::endl;
+        // std::cout<<"#2"<<std::endl;
         /**
          * augment the matrix
          * get C*kh*kw * (H-kh+1)*(W-kw+1)
          */
+        // std::cout<<"padded: \n"<< padded<<std::endl;
         matrix augmented = augment(Tensor(padded,padedh,padedw),kernel.H,kernel.W);
-
+        // std::cout<<"augmented: \n"<< augmented<<std::endl;
+        // std::cout<<"kermat: \n"<< kermat<<std::endl;
         matrix tmpout =  kermat * augmented; // (outc) * (H*W)
-        std::cout<<"#3"<<std::endl;
+        // std::cout<<"#3"<<std::endl;
         Eigen::Map<Eigen::RowVectorXd> v(tmpout.data(), tmpout.size());
-        std::cout<<"#4"<<std::endl;
+        // std::cout<<"#4"<<std::endl;
         out.row(i) = v;
-        std::cout<<"#5"<<std::endl;
+        // std::cout<<"#5"<<std::endl;
     }
     return Tensor(out,H,W);
 }

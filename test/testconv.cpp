@@ -30,6 +30,25 @@ int main()
   Tensor c = a.conv(b);
   c.print();
 
+cout<<"###########"<<endl;
+
+  bb << 0,1,     0,2,   0,3,
+        0,4,     0,5,   0,6, 
+        0,7,     0,8,   0,9  ;
+  b = Tensor(bb,3,3);
+
+//   cout << a.expand(1,2,4)<<endl;
+  c = a.conv(b);
+  c.print();
+
+cout<<"###########"<<endl;
+  bb << 1,1,   1,2,   1,3,
+        -2,4,  -2,5,  -2,6,    
+        1,7,   1,8,   1,9 ;
+  b = Tensor(bb,3,3);
+  c = a.conv(b);
+  c.print();
+
 
 //   Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic,Eigen::RowMajor> > M2(b.data(), 2,2);
 //   cout << "M2:" << endl << M2 << endl;
