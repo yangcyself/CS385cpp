@@ -43,6 +43,12 @@ public:
     matrix expand(int n, int h, int w)const ;
 
     /**
+     * if the tensor is a conv kernel, i.e. outC * H*W*inC
+     *  flip the kernel to get k_(hi,wj) = k(H-hi, W-wj)
+     */
+    Tensor kernelFlip()const; 
+
+    /**
      * kernel tensors are represented OutC * (Hk * Wk * InC)
      * this means the kernel's one line is like C1X1Y1 C2X1Y1 C3X1Y1 ... CnX1Y1 C1X1Y2 ...
      * in conv the data are arranged in the shape (H*W) * (Hk * Wk * C)

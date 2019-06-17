@@ -74,6 +74,30 @@ Tensor::expand(int n, int h, int w) const
 }
 
 Tensor
+Tensor::kernelFlip()const
+{
+    int outC = data.rows();
+    int inC = data.cols()/H/W;
+    int ns = H*W;
+    /**
+     * The  3*3 0-8's flip is simply 8-0
+     */
+    Eigen::VectorXi irow(inC);
+    for (int i = 0;i<inC;i++){
+        irow(i) = i;
+    }
+
+    Eigen::VectorXi ind(inC*ns);
+    for (int i = 0;i<ns;i++){
+        int ii = ns - i -1; 
+        ind.segment(i*inC,inC) = irow.array() + ii*inC;
+    }
+    matrix res =  data(Eigen::all, ind);
+    return Tensor(res,H,W);
+}
+
+
+Tensor
 Tensor::conv(const Tensor& kernel, int pad, double padv,int stride)const
 {
     int n = data.rows();
