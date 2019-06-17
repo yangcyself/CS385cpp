@@ -87,8 +87,10 @@ private:
     std::shared_ptr<Operator>b;
     Tensor ca;
     Tensor cb;
+    int pad;
+    int stride;
 public:
-    Conv(Operator& aa,Operator& bb):a(&aa,&null_deleter),b(&bb,&null_deleter){}
+    Conv(Operator& aa,Operator& bb, int ipad = -1, int istride = 1):a(&aa,&null_deleter),b(&bb,&null_deleter){}
     ~Conv(){}
     Tensor forward(){return a->forward().conv( b->forward());}
     void backward(const Tensor& in);

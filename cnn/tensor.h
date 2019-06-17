@@ -42,6 +42,11 @@ public:
      */
     bool is_empty(){return H>0&&W>0;}
     void set_empty(){H = W = -1;}
+
+    int height(){return H;}
+    int width(){return W;}
+
+
     /**
      * choose one row n and expand it as w*h
      *  note the w and h here is the w and h of the matrix, not of the tensor

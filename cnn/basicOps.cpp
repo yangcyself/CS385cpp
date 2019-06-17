@@ -5,6 +5,15 @@
 namespace convnn
 {
 
+
+
+Conv::Conv(Operator& aa,Operator& bb, int ipad, int istride = 1)
+    :a(&aa,&null_deleter),b(&bb,&null_deleter)
+{
+    pad = ipad;
+    stride = istride;
+}
+
 /**
  * The forward function for Conv operators
  *  if the operator is in train mode, it caches the a and b 
@@ -39,7 +48,21 @@ Conv::backward(const Tensor& in)
 {
     assert(trainmod);
     assert(!ca.is_empty() && !cb.is_empty());
+    int dpad = cb.height()-1-pad;
 
+    Tensor tpkernel = cb.kernelTranspose(); //transposed kernel
+    Tensor fpkernel = tpkernel.kernelFlip(); //fliped kernel
+    assert(cb.height()==cb.width()); //for the time being, only support padding the same of H and W
+    Tensor da = in.conv(fpkernel,dapad);
+    a->backward(da);
+
+    Tensor kout = in.kernelize();
+    Tensor tpout = kout.transposefromNHWC();
+
+    Tensor kin = ca.kernelize();
+    Tensor tdb = tpout.conv(kin, dpad);
+    Tensor db = tdb.kernelFlip();
+    b->backward(db);
 }
 
 void 
