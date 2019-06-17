@@ -25,11 +25,14 @@ Conv::forward()
 
 /**
  * dout/da can be calculate as another conv 
- *  out conv flip(b) pad_: kh-1-pad(h) , kw-1-pad(w) 
+ *  out conv flip(b) pad_: kh-1-pad(h) , kw-1-pad(w)
+ *  kernel has to transpose inC and outC
  *  use dilation to deal with forward stride(change it back to the shape before stride)
  * 
  * dout/db can also be calculate as conv similar to above
  *  however, the kernels to gradient should be flip (Not flip the input feature)
+ *  The output tensor should be transpose into outC * N*H*W 
+ *      and the input tensor should be transpose into inC * H*W*N
  */
 void
 Conv::backward(const Tensor& in)

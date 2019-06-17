@@ -10,6 +10,13 @@ namespace convnn{
  * The matrix is stored in row-major order
  * all the computation is carried out `for i in N`
  * all the convnn calculation can be represented by the tensors operation
+ * 
+ * basically, there are two types of tensor: 
+ *  one is for feature map N * CHW 
+ *  another is kernel outC * H*W*inC 
+ *  data field is the matrix, and H and W are H and W in the above lines
+ * 
+ * TODO: optimize ColomnBlockIndex and other column arrangement function, they have the same structure.
 */
 class Tensor{
 public:
@@ -49,10 +56,35 @@ public:
     Tensor kernelFlip()const; 
 
     /**
+     * transpose a tensor into kernel's representation
+     *  N * inC*H*W -> inC * H*W*N
+     * this can be done by simply mapping from row storage to col storage.
+     */
+    Tensor kernelize()const;
+
+    /**
+     * transpose a kernel tensor outC * H*W*inC into inC * H*W*outC
+     *  is transposefromNHWC  and then kernelize
+     */
+    Tensor kernelTranspose()const;
+
+    /**
+     * transpose the representation between "feature map"  and "open cv"
+     *  i.e. NCHW -> NHWC
+     */
+    Tensor transposetoNHWC()const;
+
+    /**
+     * transpose the representation between "feature map"  and "open cv"
+     *  i.e. NHWC -> NCHW
+     */
+    Tensor transposefromNHWC()const;
+
+    /**
      * kernel tensors are represented OutC * (Hk * Wk * InC)
      * this means the kernel's one line is like C1X1Y1 C2X1Y1 C3X1Y1 ... CnX1Y1 C1X1Y2 ...
      * in conv the data are arranged in the shape (H*W) * (Hk * Wk * C)
-     * So the kernel has to be transpose into the (Hk* Wk* C) * OutC [NOTE: C is the inner loop]
+     * So the kernel has to be (Hk* Wk* C) * OutC [NOTE: C is the inner loop]
      * **BASIC IDEA**
      * transfer one row of the input data into a matrix, 
      * augment the matrix in order to correspond each value to the kernel

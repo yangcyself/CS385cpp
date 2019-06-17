@@ -96,6 +96,56 @@ Tensor::kernelFlip()const
     return Tensor(res,H,W);
 }
 
+Tensor 
+Tensor::kernelize()const
+{
+    int n = data.rows();
+    int c = data.cols()/H/W;
+    Eigen::MatrixXd tmp(data.rows(),data.cols()); // eigen default storage order is col major
+    tmp << data;
+    Eigen::Map < matrix > out (tmp.data(), c,n*H*W);
+    return Tensor(out,H,W);
+}
+
+Tensor 
+Tensor::kernelTranspose()const
+{
+
+    return transposefromNHWC().kernelize();
+}
+
+Tensor 
+Tensor::transposetoNHWC()const
+{
+    int c = data.cols()/H/W;
+    int l = H*W;
+    Eigen::VectorXi irow(c);
+    for (int i = 0;i<c;i++){
+        irow(i) = i*l;
+    }
+    Eigen::VectorXi ind(c*l);
+    for (int i = 0;i<l;i++)
+        ind.segment(i*c,c) = irow.array() + i;
+    matrix res =  data(Eigen::all, ind);
+    return Tensor(res,H,W);
+}
+
+Tensor 
+Tensor::transposefromNHWC()const
+{
+    int c = data.cols()/H/W;
+    int l = H*W;
+    Eigen::VectorXi irow(l);
+    for (int i = 0;i<l;i++){
+        irow(i) = i*c;
+    }
+    Eigen::VectorXi ind(c*l);
+    for (int i = 0;i<c;i++)
+        ind.segment(i*l,l) = irow.array() + i;
+    matrix res =  data(Eigen::all, ind);
+    return Tensor(res,H,W);
+}
+
 
 Tensor
 Tensor::conv(const Tensor& kernel, int pad, double padv,int stride)const

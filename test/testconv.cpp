@@ -68,5 +68,26 @@ cout<<"#####5######"<<endl;
 cout<<"#####6######"<<endl; // kernel flip
   c = b.kernelFlip();
   c.print();
+
+cout<<"#####7######"<<endl; // kernelize
+  c = a.kernelize();
+  c.print();
+
+cout<<"#####8######"<<endl; // transposetoNHWC
+  c = a.transposetoNHWC();
+  c.print();
+
+cout<<"#####9######"<<endl; // transposefromNHWC
+  c = b.transposefromNHWC();
+  c.print();
+
+cout<<"#####10######"<<endl; // transposefromNHWC and to ...
+  c = a.transposetoNHWC().transposefromNHWC();
+  c.print();
+
+cout<<"#####11######"<<endl; // kerneltranspose
+  c = b.kernelTranspose();
+  c.print();
+
 return 0;
 }
