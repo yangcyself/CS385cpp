@@ -1,19 +1,11 @@
-// #include <cnn/tensor.h>
+
 #include <cnn/basicOps.h>
 // #include <stdio.h>
 #include <iostream>
 namespace convnn
 {
 
-
-
-Conv::Conv(Operator& aa,Operator& bb, int ipad, int istride = 1)
-    :a(&aa,&null_deleter),b(&bb,&null_deleter)
-{
-    pad = ipad;
-    stride = istride;
-}
-
+void null_deleter(Operator *){}
 /**
  * The forward function for Conv operators
  *  if the operator is in train mode, it caches the a and b 
@@ -26,9 +18,10 @@ Conv::forward()
     if(trainmod){
         ca = a->forward();
         cb = b->forward();
-        return ca.conv(cb);
+        // std::cout<<"CONV forward ca empty "<<ca.is_empty()<<std::endl;
+        return ca.conv(cb,pad,0,stride);
     }else{
-        return a->forward().conv( b->forward());
+        return a->forward().conv( b->forward(),pad,0,stride );
     }
 }
 
@@ -42,6 +35,8 @@ Conv::forward()
  *  however, the kernels to gradient should be flip (Not flip the input feature)
  *  The output tensor should be transpose into outC * N*H*W 
  *      and the input tensor should be transpose into inC * H*W*N
+ *  Then the conv result is outC * inC*H*W, transposeto outC * H*W*inC
+ * 
  */
 void
 Conv::backward(const Tensor& in)
@@ -53,15 +48,27 @@ Conv::backward(const Tensor& in)
     Tensor tpkernel = cb.kernelTranspose(); //transposed kernel
     Tensor fpkernel = tpkernel.kernelFlip(); //fliped kernel
     assert(cb.height()==cb.width()); //for the time being, only support padding the same of H and W
-    Tensor da = in.conv(fpkernel,dapad);
+    Tensor da = in.conv(fpkernel,dpad);
     a->backward(da);
 
     Tensor kout = in.kernelize();
     Tensor tpout = kout.transposefromNHWC();
 
     Tensor kin = ca.kernelize();
+    std::cout<<"kin: \n";
+    kin.print();
+    std::cout<<std::endl;
+
+    std::cout<<"tpout: \n";
+    tpout.print();
+    std::cout<<std::endl;
     Tensor tdb = tpout.conv(kin, dpad);
-    Tensor db = tdb.kernelFlip();
+    Tensor ktdb = tdb.transposetoNHWC(); 
+    Tensor db = ktdb.kernelFlip();
+
+    std::cout<<"db: \n";
+    db.print();
+    std::cout<<std::endl;
     b->backward(db);
 }
 

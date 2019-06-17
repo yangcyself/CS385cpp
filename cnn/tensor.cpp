@@ -76,7 +76,7 @@ Tensor::expand(int n, int h, int w) const
 Tensor
 Tensor::kernelFlip()const
 {
-    int outC = data.rows();
+    // int outC = data.rows();
     int inC = data.cols()/H/W;
     int ns = H*W;
     /**

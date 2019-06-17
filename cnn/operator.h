@@ -38,8 +38,8 @@ public:
     /**
      * The two functions to set and unset the trainmod flags in the whole network
      */
-    virtual void train();
-    virtual void test();
+    virtual void train()=0;
+    virtual void test()=0;
 
     // virtual void update(double step) =0;
 };

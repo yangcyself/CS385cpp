@@ -40,7 +40,7 @@ public:
      * return whether the tensor is an empty one,
      *  can be used to check the validaty 
      */
-    bool is_empty(){return H>0&&W>0;}
+    bool is_empty(){return H<=0&&W<=0;}
     void set_empty(){H = W = -1;}
 
     int height(){return H;}

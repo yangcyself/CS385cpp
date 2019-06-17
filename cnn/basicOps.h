@@ -2,7 +2,7 @@
 #define BASICOPS_H_
 
 
-#include "cnn/operator.h"
+#include <cnn/operator.h>
 #include <Eigen/Dense>
 #include <Eigen/Core>
 #include <memory> //std::shared_ptr
@@ -19,8 +19,8 @@ namespace convnn{
  *      conv
 */
 
-void null_deleter(Operator *)
-{}
+void null_deleter(Operator *);
+
 
 /**
  * Placeholder has nothing to do with back propagation
@@ -56,8 +56,8 @@ public:
     void initData(const Tensor d){data = d;}  // here should not pass by ref, because the data is going to change
 
     void backward(const Tensor& in){assert(trainmod); data = data.eleadd(in);}
-    void train(){trainmode = true;}
-    void test(){trainmode = false;}
+    void train(){trainmod = true;}
+    void test(){trainmod = false;}
 };
 
 
@@ -70,12 +70,14 @@ private:
     std::shared_ptr<Operator> b;
 public:
     Add(Operator& aa,Operator& bb):a(&aa,&null_deleter),b(&bb,&null_deleter){}
+    // Add(Operator& aa,Operator& bb):a(&aa),b(&bb){}
+
     ~Add(){}
     Tensor forward(){return a->forward().eleadd(b->forward());}
     void backward(const Tensor& in){a->backward(in); b->backward(in);}
 
-    void train(){trainmode = true;a->train();b->train();}
-    void test(){trainmode = false;a->test();b->test();}
+    void train(){trainmod = true;a->train();b->train();}
+    void test(){trainmod = false;a->test();b->test();}
 };
 
 /**
@@ -90,10 +92,15 @@ private:
     int pad;
     int stride;
 public:
-    Conv(Operator& aa,Operator& bb, int ipad = -1, int istride = 1):a(&aa,&null_deleter),b(&bb,&null_deleter){}
+    Conv(Operator& aa,Operator& bb, int ipad, int istride = 1)
+        :a(&aa,&null_deleter),b(&bb,&null_deleter),pad(ipad),stride(istride){}
+        // :a(&aa),b(&bb),pad(ipad),stride(istride){}
+
     ~Conv(){}
-    Tensor forward(){return a->forward().conv( b->forward());}
+    Tensor forward();
     void backward(const Tensor& in);
+    void train();
+    void test();
 
 
 };
