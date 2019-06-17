@@ -26,7 +26,7 @@ public:
      * constructor:
      */
     Tensor(matrix d, int h=1, int w=1);
-
+    Tensor(){W = H = -1;} // to indicate the tensor is not initialized
     ~Tensor(){}
 
     /**
