@@ -64,5 +64,5 @@ cout<<"#####4######"<<endl;
 cout<<"#####5######"<<endl;
   c = a.elemul(a);
   c.print();
-
+return 0;
 }
