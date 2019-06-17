@@ -143,10 +143,11 @@ Tensor::print()
 {
     
     std::cout << "DATA: \n" << data<< std::endl;
-    int inc = data.cols()/H/W;
-    for(int i = 0;i<data.rows();i++){
-        std::cout << "\n" << expand(i,inc,H*W )<< std::endl;
-    }
+    std::cout <<"N C H W: "<< data.rows()<<" " << data.cols()/H/W<<" " << H<<" " << W <<std::endl; 
+    // int inc = data.cols()/H/W;
+    // for(int i = 0;i<data.rows();i++){
+    //     std::cout << "\n" << expand(i,inc,H*W )<< std::endl;
+    // }
 }
 
 Tensor
