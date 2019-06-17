@@ -51,8 +51,11 @@ public:
     ~Variable(){}
     Tensor forward(){return data;}
     void initData(const Tensor d){data = d;}  // here should not pass by ref, because the data is going to change
-    void backward(const Tensor& in){data.eleadd(in);}
+    void backward(const Tensor& in){data = data.eleadd(in);}
 };
+
+
+
 
 class Add:public Operator{
 private:

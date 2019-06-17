@@ -29,5 +29,11 @@ int main(int argc, char* argv[] )
 
     Tensor res = c.forward();
     res.print();
+    
+    Tensor::matrix dd(2,2);
+    dd << 1,1,1,1;
+    Tensor td(dd,1,1);
+    c.backward(td);
+    b.forward().print();
     return 0;
 }
