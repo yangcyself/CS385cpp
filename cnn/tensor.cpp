@@ -6,17 +6,20 @@ namespace convnn
 {
 
 /**
- * for a matrix that arranged in a row W*H, find the indexs of a block of this matrix
- * 
+ * for a matrix that arranged in a row W*H, find the indexs of a submatrix 0-h 0-w
+ * s is the stride
  */
-Eigen::VectorXi ColomnBlockIndex(int H, int W, int h, int w)
+Eigen::VectorXi ColomnBlockIndex(int H, int W, int h, int w, int s = 1)
 {
+    w = (w+s-1)/s;
+    h = (h+s-1)/s;
     Eigen::VectorXi irow(w);
-    for (int i = 0;i<w;i++)
-        irow(i) = i;
+    for (int i = 0;i<w;i++){
+        irow(i) = i*s;
+    }
     Eigen::VectorXi ind(w*h);
     for (int i = 0;i<h;i++)
-        ind.segment(i*w,w) = irow.array() + i*W;
+        ind.segment(i*w,w) = irow.array() + i*W*s;
     // std::cout<<"H,W,h,w,ind"<<H<<" "<<W<<" "<<h<<" "<<w<<" \n"<<ind <<std::endl;
     return ind;
 }
@@ -77,7 +80,20 @@ Tensor::conv(const Tensor& kernel, int pad, double padv,int stride)const
     int inc = data.cols()/H/W;
     matrix kermat = kernel.data;
     int outc = kermat.rows();
-    matrix out(n,H*W*outc);
+    int kh = kernel.H; int kw = kernel.W;
+
+    int padh = pad; int padw = pad;
+    if(pad==-1){
+        padh = (kh-1)/2;
+        padw = (kw-1)/2;
+    }
+    int padedh = (H+2*padh); int padedw = (W+2*padw);
+
+    int augh = (padedh-kh+1); int augw = padedw-kw+1;
+
+    int outH = (augh + stride -1 )/stride;
+    int outW = (augw + stride -1 )/stride;
+    matrix out(n,outH*outW*outc);
     // std::cout<<"#0"<<std::endl;
     for(int i = 0; i < n ;i++){
         matrix tmp = expand(i,inc,H*W); //inc * H*W
@@ -86,33 +102,40 @@ Tensor::conv(const Tensor& kernel, int pad, double padv,int stride)const
          * pad the matrix tmp
          */
         // std::cout<<"#1"<<std::endl;
-        int padh = pad; int padw = pad;
-        if(pad==-1){
-            padh = (kernel.H-1)/2;
-            padw = (kernel.W-1)/2;
-        }
-        int padedh = (H+2*padh); int padedw = (W+2*padw);
+        
         matrix padded = matrix::Constant (tmp.rows(), padedh * padedw , padv);
         Eigen::VectorXi ind = ColomnBlockIndex( padedh , padedw , H , W);
         // std::cout << ind <<std::endl;
         padded(Eigen::all, ind.array() + padw + padh * padedw ) = tmp;
         // std::cout<<"#2"<<std::endl;
+
         /**
          * augment the matrix
          * get C*kh*kw * (H-kh+1)*(W-kw+1)
          */
+
+        matrix augmented = augment(Tensor(padded,padedh,padedw),kh,kw);
         // std::cout<<"padded: \n"<< padded<<std::endl;
-        matrix augmented = augment(Tensor(padded,padedh,padedw),kernel.H,kernel.W);
         // std::cout<<"augmented: \n"<< augmented<<std::endl;
         // std::cout<<"kermat: \n"<< kermat<<std::endl;
-        matrix tmpout =  kermat * augmented; // (outc) * (H*W)
+
+        /**
+         * stride the matrix
+         */
+        matrix stridded;
+        if(stride == 1)
+            stridded = augmented;
+        else{
+            stridded = augmented(Eigen::all,ColomnBlockIndex(augh,augw,augh,augw,stride) );
+        }
+        matrix tmpout =  kermat * stridded; // (outc) * (H*W)
         // std::cout<<"#3"<<std::endl;
         Eigen::Map<Eigen::RowVectorXd> v(tmpout.data(), tmpout.size());
         // std::cout<<"#4"<<std::endl;
         out.row(i) = v;
         // std::cout<<"#5"<<std::endl;
     }
-    return Tensor(out,H,W);
+    return Tensor(out,outH,outW);
 }
 
 void
