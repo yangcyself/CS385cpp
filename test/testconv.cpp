@@ -20,11 +20,11 @@ int main()
 //   a <<aa; // this means the stroage order is transparent to the << operator 
 
   Tensor a(aa,2,2); // a is a 3 * 2*2*2 tensor
-  Eigen::MatrixXd bb(3,2);
-  bb << 1,-1,
-        2, 0,
-        0,-1 ;
-  Tensor b(bb,1,1);
+  Eigen::MatrixXd bb(1,18); //b is a 1 * 3*3*2 tensor
+  bb << 1,0,   1,0,   1,0,
+        -2,0,  -2,0,  -2,0,    
+        1,0,   1,0,   1,0   ;
+  Tensor b(bb,3,3);
 
 //   cout << a.expand(1,2,4)<<endl;
   Tensor c = a.conv(b);
