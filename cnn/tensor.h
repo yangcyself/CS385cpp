@@ -45,7 +45,7 @@ public:
 
     int height(){return H;}
     int width(){return W;}
-
+    int mat(){return data;}
 
     /**
      * choose one row n and expand it as w*h
