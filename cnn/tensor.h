@@ -30,6 +30,12 @@ public:
     ~Tensor(){}
 
     /**
+     * return whether the tensor is an empty one,
+     *  can be used to check the validaty 
+     */
+    bool is_empty(){return H>0&&W>0;}
+    void set_empty(){H = W = -1;}
+    /**
      * choose one row n and expand it as w*h
      *  note the w and h here is the w and h of the matrix, not of the tensor
      * if n is -1, just return the data field in tensor
