@@ -136,7 +136,7 @@ int main( int argc, char** argv )
    fnum = argv[3];
  
  if(argc >=5 )
-   put_into_neg = atoi(argc[4]);
+   put_into_neg = atoi(argv[4]);
 
  while(!fin.eof()){
      // read the picture
@@ -157,7 +157,7 @@ int main( int argc, char** argv )
         for (int j = 0;j<9;j++){
            res_image = tmpres.data[j];
            std::string pos_neg = (j==4)? "pos/" : "neg/";
-           if(!put_into_neg && j!=4) //not positive image and don't have to put into neg
+           if(!(put_into_neg==1) && j!=4) //not positive image and don't have to put into neg
                continue;
            saveimg(res_image,num++,outfolder + pos_neg+fnum);
         }
