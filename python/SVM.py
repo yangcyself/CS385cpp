@@ -5,6 +5,7 @@ sys.path.append("../protobuf/dataset/")
 import hog_pb2
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle as pkl
 
 hogfeatures = hog_pb2.hogdataset()
 
@@ -44,16 +45,19 @@ def test_one_Modle(kerneltype):
     clf = svm.SVC(gamma='auto',kernel=kerneltype)
     clf.fit(trainX, trainy)  
     acc = np.count_nonzero(clf.predict(testX) == testy) / testy.shape[0]
+    with open("{}_svm.pkl".format(kerneltype),"wb") as f:
+        pkl.dump(clf,f)
     print("ACC: " ,acc)
     print("clf_support number: ",len(clf.support_ ))
-    number_of_visual = 21
-    for i in np.random.choice( clf.support_, number_of_visual):
-        p = trainpaths[i]
-        # print(p)
-        support = plt.imread(os.path.join("../", p))
-        plt.imsave(os.path.join("../reportPics/","supportimg_{}_{}.jpg".format(kerneltype,i)),support)
-        # plt.imshow(support )
-        # plt.show()
+    # number_of_visual = 21
+    # for i in np.random.choice( clf.support_, number_of_visual):
+    #     p = trainpaths[i]
+    #     # print(p)
+    #     support = plt.imread(os.path.join("../", p))
+    #     plt.imsave(os.path.join("../reportPics/","supportimg_{}_{}.jpg".format(kerneltype,i)),support)
+    #     # plt.imshow(support )
+    #     # plt.show()
+    
 
 for m in ["linear", "poly", "rbf", "sigmoid"]:
     test_one_Modle(m)

@@ -142,15 +142,71 @@ I use Keras as the frame work for it is super easy. I built a four-layer network
 
 With learning rate = 0.001, weight decay= 1e-6 and momentum=0.9, after trained for 20 epochs, finally the training and testing accuracy reaches 
 
-> train accuracy: 0.9805  	test accuracy: 0.9848
+> train accuracy: 0.9815  	test accuracy: 0.9822
 
 ## face detection
 
+The face detection file can be seen at [python/faceDection.py](./python/faceDection.py) , in which a window is cut from all kinds of positions and scales, and run the classifier to get the result. The result can be seen as following. (the result has been choose to be representative)
 
+### Linear SVM
 
-## feature distribution
+![](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\linearSVM_4.jpg)
 
+![linearSVM_7](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\linearSVM_7.jpg)
 
+![linearSVM_8](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\linearSVM_8.jpg)
 
-# Stories (met problems)
+![linearSVM_9](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\linearSVM_9.jpg)
+
+![linearSVM_12](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\linearSVM_12.jpg)
+
+![linearSVM_14](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\linearSVM_14.jpg)
+
+![linearSVM_18](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\linearSVM_18.jpg)
+
+#### polySVM
+
+![](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\polySVM_9.jpg)
+
+The Poly SVM can hardly find any positive results
+
+#### rbfSVM
+
+![](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\rbfSVM_7.jpg)
+
+![rbfSVM_14](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\rbfSVM_14.jpg)
+
+![rbfSVM_17](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\rbfSVM_17.jpg)
+
+![sigmoidSVM_2](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\sigmoidSVM_2.jpg)
+
+![sigmoidSVM_3](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\sigmoidSVM_3.jpg)
+
+![sigmoidSVM_4](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\sigmoidSVM_4.jpg)
+
+#### CNN 
+
+![](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\CNN_0.jpg)
+
+![CNN_7](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\CNN_7.jpg)
+
+![CNN_13](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\CNN_13.jpg)
+
+#### LOGISTIC
+
+![](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\LOGISTIC_2.jpg)
+
+![LOGISTIC_3](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\LOGISTIC_3.jpg)
+
+![LOGISTIC_4](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\LOGISTIC_4.jpg)
+
+![LOGISTIC_6](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\LOGISTIC_6.jpg)
+
+![LOGISTIC_7](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\LOGISTIC_7.jpg)
+
+![LOGISTIC_12](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\LOGISTIC_12.jpg)
+
+![LOGISTIC_19](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\python\out\LOGISTIC_19.jpg)
+
+we can find that if the boxes can be clustered together, the result will be much better.
 
