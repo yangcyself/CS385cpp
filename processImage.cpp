@@ -1,3 +1,10 @@
+/**
+ * automatically crop the images and put them into target folder
+ * usage:
+ * ./processImage <ellipseList File> <output folder> <count start number> <put into neg>
+ * e.g.
+ * ./processImage ../FDDB-folds/FDDB-fold-09-ellipseList.txt ./out/test/ 09_ 0
+ */
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgcodecs/imgcodecs.hpp>
 #include <iostream>
@@ -123,8 +130,13 @@ int main( int argc, char** argv )
  else 
    outfolder = "./out/";
 
+ int put_into_neg = 1;
+
  if(argc >=4)
    fnum = argv[3];
+ 
+ if(argc >=5 )
+   put_into_neg = atoi(argc[4]);
 
  while(!fin.eof()){
      // read the picture
@@ -145,6 +157,8 @@ int main( int argc, char** argv )
         for (int j = 0;j<9;j++){
            res_image = tmpres.data[j];
            std::string pos_neg = (j==4)? "pos/" : "neg/";
+           if(!put_into_neg && j!=4) //not positive image and don't have to put into neg
+               continue;
            saveimg(res_image,num++,outfolder + pos_neg+fnum);
         }
         
