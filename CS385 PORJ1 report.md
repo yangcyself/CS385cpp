@@ -138,11 +138,19 @@ To construct a CNN frame work by hand, two key issues have to be solved. The fir
 
 ### CNN with off the shelf frameworks
 
+I use Keras as the frame work for it is super easy. I built a four-layer network with feature map channel numbers `64, 256, 256, 256` 
 
+With learning rate = 0.001, weight decay= 1e-6 and momentum=0.9, after trained for 20 epochs, finally the training and testing accuracy reaches 
+
+> train accuracy: 0.9805  	test accuracy: 0.9848
 
 ## face detection
 
+
+
 ## feature distribution
+
+
 
 # Stories (met problems)
 

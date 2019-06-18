@@ -39,7 +39,7 @@ data/
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
-from keras.layers import Activation, Dropout, Flatten, Dense
+from keras.layers import Activation, Dropout, Flatten, Dense,BatchNormalization
 from keras import backend as K
 from PIL import ImageFile
 from keras import optimizers
@@ -63,30 +63,35 @@ else:
 
 model = Sequential()
 model.add(Conv2D(64, (3, 3), input_shape=input_shape))
+model.add(BatchNormalization())
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Conv2D(256, (3, 3)))
+model.add(BatchNormalization())
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Conv2D(256, (3, 3)))
+model.add(BatchNormalization())
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Conv2D(256, (3, 3)))
+model.add(BatchNormalization())
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 
 model.add(Flatten())
-model.add(Dropout(0.5))
-model.add(Dense(120))
+# model.add(Dropout(0.5))
+model.add(Dense(1))
 model.add(Activation('sigmoid'))
-sgd = optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+sgd = optimizers.SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
 
-model.compile(loss='categorical_crossentropy',
+model.compile(loss='binary_crossentropy',
               optimizer=sgd,
+            #   optimizer="rmsprop",
               metrics=['accuracy'])
 
 # this is the augmentation configuration we will use for training
@@ -100,13 +105,13 @@ train_generator = train_datagen.flow_from_directory(
     train_data_dir,
     target_size=(img_width, img_height),
     batch_size=batch_size,
-    class_mode='categorical') #"categorical" will be 2D one-hot encoded labels,
+    class_mode='binary') #"categorical" will be 2D one-hot encoded labels,
 
 validation_generator = test_datagen.flow_from_directory(
     validation_data_dir,
     target_size=(img_width, img_height),
     batch_size=batch_size,
-    class_mode='categorical')#"input" will be images identical to input images (mainly used to work with autoencoders).
+    class_mode='binary')#"input" will be images identical to input images (mainly used to work with autoencoders).
 
 model.fit_generator(
     train_generator,
