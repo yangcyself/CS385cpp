@@ -13,10 +13,14 @@ using namespace fisher;
 
 int main(int argc, char const *argv[])
 {
+    // Eigen::VectorXd a(1);
+    // a << 0.5;
+    // double b = a(0);
+    // cout<<b<<endl;
     fisheror a(2);
     Eigen::MatrixXd X(3,2);
     Eigen::Vector3d Y;
-    X << 0,2,
+    X << 0,3,
          -1,-1,
          2,0;
     Y << 1,0,1;

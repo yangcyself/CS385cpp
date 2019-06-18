@@ -22,6 +22,7 @@ private:
      */
     matrix cov(const matrix& X)const;
     vector miu(const matrix& X)const;
+    double thresh;
 public:
 
     /**
@@ -43,7 +44,8 @@ public:
      * calculat the optimal projection vector beta
      */
     void train(const vector& Y, const matrix& X);
-
+    
+    double threshold(){return thresh;}
 };
 
 

@@ -53,6 +53,7 @@ fisheror::forward(const fisheror::matrix& X)const
     return X*beta;
 }
 
+
 void 
 fisheror::train(const fisheror::vector& Y, const fisheror::matrix& X)
 {
@@ -84,6 +85,25 @@ fisheror::train(const fisheror::vector& Y, const fisheror::matrix& X)
     Cwithin += 1e-6 * matrix::Identity(p,p);
     beta = Cwithin.colPivHouseholderQr().solve(upos - uneg);
     beta.normalize();
+    std::cout << (upos.transpose()*beta + uneg.transpose() * beta)/2 <<std::endl;
+    thresh = ((upos.transpose()*beta + uneg.transpose() * beta)/2)(0); // add (0) to read from the 1*1 vector
+    // thresh = (upos*beta.transpose() + uneg * beta.transpose())/2;
+    std::cout <<"#### TRAINED RESULT" <<std::endl;
+    std::cout << "threshould"<<thresh<<std::endl;
+
+    /**
+     * calculate the intra and inter class variance
+     */
+    vector ypos = Xpos * beta;
+    vector yneg = Xneg * beta;
+    matrix covypos = cov(ypos);
+    matrix covyneg = cov(yneg);
+    std::cout << "ypos variance: "<< covypos <<std::endl;
+    std::cout << "yneg variance: "<< covyneg <<std::endl;
+    std::cout << "average intra variance:"<< npos*covypos + nneg * covyneg <<std::endl;
+    vector tmp(ypos.rows()+yneg.rows());
+    tmp<<ypos, yneg;
+    std::cout << "inter variance:"<< cov(tmp) <<std::endl<<std::endl;
 }
 
 
