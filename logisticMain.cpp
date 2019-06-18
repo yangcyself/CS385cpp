@@ -2,13 +2,14 @@
  * usage
  * 
  * g++ -I/home/yangcy/programs/eigen -I. logisticMain.cpp logistic/logistic.cpp dataset/matrix_dataset.cpp  protobuf/dataset.hog.pb.cc -o logisticMain $(pkg-config --cflags --libs protobuf) -std=c++11
- * ./logisticMain
+ * ./logisticMain 0.1 0.001
  */
 
 #include <logistic/logistic.h>
 #include <iostream>
 #include <Eigen/Dense>
 #include <dataset/matrix_dataset.h>
+#include <string>
 using namespace std;
 using namespace logistic;
 using namespace dataset;
@@ -22,8 +23,8 @@ double accuracy(Eigen::VectorXd y, Eigen::VectorXd y_)
     Eigen::VectorXi y_neg = (y_.array() < 0.5).cast <int> ();
     // cout<<"y_.head(100): \n"<<y_.head(100)<<endl;
     // cout<<"y_pos.shape: "<< y_pos.rows()<<endl;
-    // cout<<"y_pos.count() "<<y_pos.sum()<<endl;
-    // cout<<"y_neg.count() "<<y_neg.sum()<<endl;
+    cout<<"y_pos.count() "<<y_pos.sum()<<endl;
+    cout<<"y_neg.count() "<<y_neg.sum()<<endl;
     int true_positive = y_true.transpose() * y_pos;
     int true_negtive = y_true.transpose() * y_neg;
     int false_positive = y_false.transpose() * y_pos;
@@ -42,25 +43,28 @@ int main(int argc, char const *argv[])
     MatrixDataset TrainDataset("./out/hog.ptbf",false);
     MatrixDataset TestDataset("./out/hog.ptbf",true);
 
-    // MatrixDataset::matrix trainX = TrainDataset.X();
-    // MatrixDataset::vector trainY = TrainDataset.Y();
+    MatrixDataset::matrix trainX = TrainDataset.X();
+    MatrixDataset::vector trainY = TrainDataset.Y();
     MatrixDataset::matrix testX = TestDataset.X();
     MatrixDataset::vector testY = TestDataset.Y();
+    Eigen::VectorXd trainY_;
     Eigen::VectorXd testY_;
     int p = TrainDataset.P();
     Logistictor a(p);
-    cout<<"testX.mean \n"<<testX.mean()<<endl;
-    cout<<"testY.mean \n"<<testY.mean()<<endl;
+    // cout<<"testX.mean \n"<<testX.mean()<<endl;
+    // cout<<"testY.mean \n"<<testY.mean()<<endl;
     // a.train(trainY,trainX,1,0.1,0.001);
+    double lr = atof(argv[1]);
+    double lgv = atof(argv[2]);
+    for(int i = 0;i<10;i++){
+        a.train(trainY,trainX,10,lr,lgv);
 
-    testY_ = a.forward(testX);
-    cout<<"train accuracy: "<<accuracy(testY, testY_)<<endl;
+        trainY_ = a.forward(trainX);
+        cout<<"train accuracy: "<<accuracy(trainY, trainY_)<<endl;
 
-    a.train(testY,testX,1,0.01,0);
-
-    testY_ = a.forward(testX);
-    cout<<"train accuracy: "<<accuracy(testY, testY_)<<endl;
-
+        testY_ = a.forward(testX);
+        cout<<"test accuracy: "<<accuracy(testY, testY_)<<endl;
+    }
     // MatrixDataset::vector testY_ = a.forward(testX);
     
     // cout<<"forward:\n"<<a.forward(X)<<endl;

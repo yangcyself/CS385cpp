@@ -57,6 +57,7 @@ Logistictor::train(const Logistictor::vector& Y, const Logistictor::matrix& X,
         vector p = forward(X); // probability
         // vector d = (X.rowwise().transpose()*(Y-p)).sum(); //derivative
         vector dyp = Y-p;
+        // vector grad = dyp.array() * (1-p.array())*p.array(); // the gradient of sigmoid
         vector d = dyp.transpose()*aX; //derivative n
         // vector d = dm.transpose().colwise().sum();
         // std::cout<<d<<std::endl;
