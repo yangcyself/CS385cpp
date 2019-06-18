@@ -16,7 +16,8 @@ namespace convnn{
  *  fc layer
  *  relu layer
  *  max pooling layer
- *  
+ *  sigmoid layer
+ *  TODO: add bias in these layers
 */
 
 /**
@@ -47,7 +48,8 @@ public:
         {kernel.initData(Tensor(matrix::Random(outC,inC*K*K )*initRange, K,K ));}
     ~ConvLayer(){}
     Tensor forward(){return convolution.forward();}
-    void backward(const Tensor& in){convolution.backward(in);}
+    Variable ker()const{return kernel;}
+    void backward(const Tensor& in){ convolution.backward(in);}
     void train(){convolution.train();}
     void test(){convolution.test();}
 };
@@ -113,6 +115,26 @@ public:
 
     MaxpoolLayer(Operator& aa, int k):a(&aa,&null_deleter),K(k){}
     ~MaxpoolLayer(){}
+    Tensor forward();
+    void backward(const Tensor& in);
+    void train(){a->train();}
+    void test(){a->test();}
+};
+
+
+/**
+ * sigmoid layer ...
+ * The input a shoud have the shape N 1 1 1
+ */
+class SigmoidLayer:public Operator{
+
+private:
+    std::shared_ptr<Operator> a;
+    matrix ca;
+public:
+
+    SigmoidLayer(Operator& aa):a(&aa,&null_deleter){}
+    ~SigmoidLayer(){}
     Tensor forward();
     void backward(const Tensor& in);
     void train(){a->train();}

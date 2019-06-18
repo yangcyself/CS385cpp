@@ -115,7 +115,7 @@ public:
      */
     Tensor elemul(const Tensor& other) const;
     
-    void print();
+    void print() const;
 
 
 };

@@ -213,7 +213,7 @@ Tensor::conv(const Tensor& kernel, int pad, double padv,int stride)const
 }
 
 void
-Tensor::print()
+Tensor::print() const
 {
     
     std::cout << "DATA: \n" << data<< std::endl;

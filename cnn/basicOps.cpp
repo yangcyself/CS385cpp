@@ -45,6 +45,7 @@ Conv::backward(const Tensor& in)
     assert(!ca.is_empty() && !cb.is_empty());
     int dpad = cb.height()-1-pad;
 
+
     Tensor tpkernel = cb.kernelTranspose(); //transposed kernel
     Tensor fpkernel = tpkernel.kernelFlip(); //fliped kernel
     assert(cb.height()==cb.width()); //for the time being, only support padding the same of H and W
@@ -55,20 +56,20 @@ Conv::backward(const Tensor& in)
     Tensor tpout = kout.transposefromNHWC();
 
     Tensor kin = ca.kernelize();
-    std::cout<<"kin: \n";
-    kin.print();
-    std::cout<<std::endl;
 
-    std::cout<<"tpout: \n";
-    tpout.print();
-    std::cout<<std::endl;
+    // std::cout<<"kin: \n";
+    // kin.print();
+    // std::cout<<std::endl;
+    // std::cout<<"tpout: \n";
+    // tpout.print();
+    // std::cout<<std::endl;
+
     Tensor tdb = tpout.conv(kin, dpad);
     Tensor ktdb = tdb.transposetoNHWC(); 
     Tensor db = ktdb.kernelFlip();
-
-    std::cout<<"db: \n";
-    db.print();
-    std::cout<<std::endl;
+    // std::cout<<"db: \n";
+    // db.print();
+    // std::cout<<std::endl;
     b->backward(db);
 }
 

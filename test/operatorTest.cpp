@@ -42,7 +42,7 @@ int main(int argc, char* argv[] )
     
 
     Tensor::matrix gg(2,8);
-    gg <<   0,0,0,0, 0,0,0,0,
+    gg <<   1,0,0,0, 0,0,0,0,
             0,0,0,0, 0,0,0,0;
     Tensor grad(gg,2,2);
     c.backward(grad);

@@ -91,8 +91,6 @@ MaxpoolLayer::forward()
     int C = inputw/inH/inW;
     int outputh = inputh;
     int outputw = C*outH*outW;
-    std::cout<<"indexv\n"<<indevx<<std::endl;
-    std::cout<<"indexv\n"<<indevy<<std::endl;
     matrix out(outputh,outputw);
     // assert(C*outH*outW == indevx.rows());
     for(int i = 0;i<outputh;i++){
@@ -126,6 +124,28 @@ MaxpoolLayer::backward(const Tensor& in)
     return a->backward(Tensor(grad, inH, inW));
 }
 
+
+double sigmoid(double x) // the functor we want to apply
+{
+    return 1/( 1 + std::exp(-x) );
+}
+
+Tensor 
+SigmoidLayer::forward()
+{
+    ca = a->forward().mat();
+    assert(ca.cols()==1);
+    ca = ca.unaryExpr(std::ptr_fun(sigmoid));
+    return Tensor(ca,1,1);
+}
+
+void 
+SigmoidLayer::backward(const Tensor& in)
+{
+    matrix grad = (1-ca.array())*ca.array();// gradient of sigmoid p(1-p)
+    grad = grad.array()*in.mat().array();
+    a->backward(Tensor(grad,1,1));
+}
 
 
 }//namespace convnn
