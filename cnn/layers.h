@@ -28,9 +28,9 @@ class ConvLayer:public Operator{
 
 private:
     std::shared_ptr<Operator> a;
+    Variable kernel;
     Conv convolution;
 public:
-    Variable kernel;
 
     /**
      * arguments 
@@ -44,7 +44,7 @@ public:
      */
     ConvLayer(Operator& aa, int inC, int outC, int K, int pad, int stride, double initRange)
         :a(&aa,&null_deleter),kernel(),convolution(aa,kernel,pad,stride)
-        {kernel.initData(Tensor(matrix::Random(outC,inc*K*K )*initRange, K,K ));}
+        {kernel.initData(Tensor(matrix::Random(outC,inC*K*K )*initRange, K,K ));}
     ~ConvLayer(){}
     Tensor forward(){return convolution.forward();}
     void backward(const Tensor& in){convolution.backward(in);}
@@ -61,13 +61,13 @@ class FcLayer:public Operator{
 
 private:
     std::shared_ptr<Operator> a;
+    Variable kernel;
     Conv convolution;
 public:
-    Variable kernel;
 
     FcLayer(Operator& aa, int inC, int outC, double initRange)
-        :a(&aa,&null_deleter),kernel(),convolution(aa,kernel,pad,stride)
-        {kernel.initData(Tensor(matrix::Random(outC,inc*1*1 )*initRange, 1,1 ));}
+        :a(&aa,&null_deleter),kernel(),convolution(aa,kernel,0,1)
+        {kernel.initData(Tensor(matrix::Random(outC,inC*1*1 )*initRange, 1,1 ));}
     ~FcLayer(){}
     Tensor forward(){return convolution.forward();}
     void backward(const Tensor& in){convolution.backward(in);}
@@ -84,7 +84,7 @@ class ReluLayer:public Operator{
 private:
     std::shared_ptr<Operator> a;
     Tensor ca;
-    Tensor relu(const Tensor& in)const;
+    Tensor reluMask(const Tensor& in)const;
 public:
 
     ReluLayer(Operator& aa):a(&aa,&null_deleter){}
@@ -102,8 +102,8 @@ class MaxpoolLayer:public Operator{
 
 private:
     std::shared_ptr<Operator> a;
-    vector indevx; // the indexs for pooling
-    vector indevy; // the indexs for pooling
+    Eigen::VectorXi indevx; // the indexs for pooling
+    Eigen::VectorXi indevy; // the indexs for pooling
     int K;
     int inputh, inputw;
     int inH, inW;

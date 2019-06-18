@@ -43,9 +43,9 @@ public:
     bool is_empty(){return H<=0&&W<=0;}
     void set_empty(){H = W = -1;}
 
-    int height(){return H;}
-    int width(){return W;}
-    int mat(){return data;}
+    int height()const {return H;}
+    int width()const {return W;}
+    matrix mat()const {return data;}
 
     /**
      * choose one row n and expand it as w*h
@@ -108,12 +108,12 @@ public:
     /**
      * add with another tensor element wise, with the function of broadcast
      */
-    Tensor eleadd(const Tensor& other);
+    Tensor eleadd(const Tensor& other) const;
 
     /**
      * multiply with another tensor element wise, with the function of broadcast
      */
-    Tensor elemul(const Tensor& other);
+    Tensor elemul(const Tensor& other) const;
     
     void print();
 

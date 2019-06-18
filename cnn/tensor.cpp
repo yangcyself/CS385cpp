@@ -225,13 +225,13 @@ Tensor::print()
 }
 
 Tensor
-Tensor::eleadd(const Tensor& other)
+Tensor::eleadd(const Tensor& other)const
 {
     matrix out = data.array() + other.data.array();
     return Tensor(out, H,W);
 }
 Tensor 
-Tensor::elemul(const Tensor& other)
+Tensor::elemul(const Tensor& other) const
 {
     matrix out = data.array() * other.data.array();
     return Tensor(out, H,W);
