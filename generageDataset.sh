@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # bash
 mkdir -p out/test/neg
 mkdir -p out/test/pos
