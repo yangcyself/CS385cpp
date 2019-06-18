@@ -14,6 +14,75 @@ The raw picture processing source file is [processImage.cpp](./processImage.cpp)
 
 ### calculating and visualizing Hog features
 
-I use the `opencv::HOGDescriptor` to calculate the Hog features, as in [hogCalculate.cpp](./hogCalculate.cpp) . I save the calculated the Hog feature into binary file using Protocol buffer, formatted as in the file [dataset.hog.proto](protobuf\dataset.hog.proto)
+I use the `opencv::HOGDescriptor` to calculate the Hog features, forms a 900d descript vector for each picture , as in [hogCalculate.cpp](./hogCalculate.cpp) . I save the calculated the Hog feature into binary file using Protocol buffer, formatted as in the file [dataset.hog.proto](protobuf\dataset.hog.proto)
 
 To visualize the Hog features, use the program complied from [hogOutVisualize.cpp](./hogOutVisualize.cpp), which reads in the protobuf binary file and visualize the hog feature saved in it. Here I visualize the hog vectors on the original graph for a better visualization effect. Some example visualization results are as following.
+
+![visualize](./reportPics/1.jpg) ![visualize](./reportPics/2.jpg) ![visualize](./reportPics/3.jpg) ![visualize](./reportPics/4.jpg) ![visualize](./reportPics/5.jpg) ![visualize](./reportPics/6.jpg)
+
+
+
+## Logistic Model
+
+The C++ Logistic implementation is in [logistic](./logistic), and using the [logisticMain.cpp](logisticMain.cpp) to train and test the model.  With learning rate 0.1 and Langevin 0.001
+
+```bash
+./logisticMain 0.01 0.001
+```
+
+After training for 1 epoch, the train accuracy and test accuracy can all reach 0.8. But that's because the model learned to guess 0 for all inputs.
+
+After training for 10 epoch, the situation still remains the same,  and so are the other epochs
+
+With learning rate 0.0005 and Langevin 0.00001
+
+```bash
+./logisticMain 0.0005 0.00001
+```
+
+The accuracies of the initial epochs are:
+
+> train test
+>
+> 0.81 0.82
+>
+> 0.95 0.96
+>
+> 0.95 0.96
+>
+> and on ...
+
+And at epoch 100, the model can reach
+
+0.971 for train accuracy and 0.975 for test accuracy
+
+## Fisher Model
+
+The fisher model is implemented in the folder [fisher](./fisher), and using [fisherMain.cpp](fisherMain.cpp) to train and test the model.
+
+When the model do classifying, it uses the middle point of the embedded mean value of positive samples and negative samples as the threshold.  The final accuracy is **0.980 for training and 0.977 for testing**.
+
+The embedded training set has the following inter and intra variance:
+
+> intra variance for positive samples: 0.00929 
+>
+> intra variance for negative samples: 0.00245
+>
+> inter variance for whole samples: 0.0199
+
+We can find that the inter variance is much larger than inter variance.
+
+## SVMs
+
+
+
+## CNN
+
+The c++ implementation of CNN can be seen on [github](<https://github.com/yangcyself/CS385cpp/tree/master/cnn>). However, as mentioned at the beginning, I do not have the time to test on a real classification task (due to the amount of work in implementing a minibatch data loader and the potential difficulties). I have checked the correctness of each modules by comparing the result on toy data with the result calculated by hand. 
+
+## face detection
+
+## feature distribution
+
+# Stories (met problems)
+
