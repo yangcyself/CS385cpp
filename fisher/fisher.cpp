@@ -100,7 +100,7 @@ fisheror::train(const fisheror::vector& Y, const fisheror::matrix& X)
     matrix covyneg = cov(yneg);
     std::cout << "ypos variance: "<< covypos <<std::endl;
     std::cout << "yneg variance: "<< covyneg <<std::endl;
-    std::cout << "average intra variance:"<< npos*covypos + nneg * covyneg <<std::endl;
+    std::cout << "average intra variance:"<< (npos*covypos + nneg * covyneg)/(npos+nneg) <<std::endl;
     vector tmp(ypos.rows()+yneg.rows());
     tmp<<ypos, yneg;
     std::cout << "inter variance:"<< cov(tmp) <<std::endl<<std::endl;
