@@ -56,6 +56,8 @@ And at epoch 100, the model can reach
 
 0.971 for train accuracy and 0.975 for test accuracy
 
+
+
 ## Fisher Model
 
 The fisher model is implemented in the folder [fisher](./fisher), and using [fisherMain.cpp](fisherMain.cpp) to train and test the model.
@@ -72,13 +74,19 @@ The embedded training set has the following inter and intra variance:
 
 We can find that the inter variance is much larger than inter variance.
 
+
+
 ## SVMs
 
 
 
+![](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg963.jpg)![supportimg990](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg990.jpg) ![supportimg1139](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg1139.jpg)![supportimg1503](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg1503.jpg) ![supportimg1893](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg1893.jpg) ![supportimg5183](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg5183.jpg) ![supportimg9194](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg9194.jpg) ![supportimg14921](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg14921.jpg) ![supportimg14933](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg14933.jpg) ![supportimg20539](D:\yangcy\UNVjunior\CS385\PROJ1\CS385cpp\reportPics\supportimg20539.jpg)
+
 ## CNN
 
-The c++ implementation of CNN can be seen on [github](<https://github.com/yangcyself/CS385cpp/tree/master/cnn>). However, as mentioned at the beginning, I do not have the time to test on a real classification task (due to the amount of work in implementing a minibatch data loader and the potential difficulties). I have checked the correctness of each modules by comparing the result on toy data with the result calculated by hand. 
+The C++ implementation of CNN can be seen on [github](<https://github.com/yangcyself/CS385cpp/tree/master/cnn>). However, as mentioned at the beginning, I do not have the time to test on a real classification task (due to the amount of work in implementing a minibatch data loader and the potential difficulties). I have checked the correctness of each modules by comparing the result on toy data with the result calculated by hand. 
+
+To construct a CNN frame work by hand, two key issues have to be solved. The first one is the convolution calculation, and the second one is to design a abstraction that allows forward and backward propagation. 
 
 ## face detection
 
